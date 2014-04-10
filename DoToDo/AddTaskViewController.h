@@ -12,6 +12,7 @@
 
 @property (nonatomic, weak) IBOutlet UITextField *taskName;
 //date
+- (IBAction)addTask:(id)sender;
 
 
 

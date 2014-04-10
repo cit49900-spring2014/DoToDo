@@ -7,6 +7,8 @@
 //
 
 #import "AddTaskViewController.h"
+#import "Task.h"
+#import "ToDoStore.h"
 
 @interface AddTaskViewController ()
 
@@ -27,6 +29,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    NSLog(@"add task view controller end up loading...sweet"); 
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,4 +40,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)addTask:(id)sender {
+    
+    Task *newTask = [[ToDoStore sharedStore]createTask];
+    
+    [newTask setLabel:@"some boring task"];
+    
+    [[ToDoStore sharedStore]saveChanges]; 
+    
+    
+    NSLog(@"you added a task");
+}
 @end
