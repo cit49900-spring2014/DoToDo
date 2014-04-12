@@ -8,6 +8,7 @@
 
 #import "ToDoStore.h"
 
+
 @implementation ToDoStore
 @synthesize context;
 
@@ -32,6 +33,7 @@
     if (self)
     {
         allCats = [[NSMutableArray alloc] init];
+        allTasks = [[NSMutableArray alloc]init]; 
         
         // CREATE NSMANAGEDOBJECTMODEL (MAP)
         model = [NSManagedObjectModel mergedModelFromBundles:nil];
@@ -64,6 +66,7 @@
         
         // POPULATE OUR LOCAL ARRAY WITH ALL ITEMS FROM THE DATABASE
         [self loadAllCategories];
+        [self loadAllTasks]; 
         
         NSLog(@"hello"); 
         
@@ -88,7 +91,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     
     // IDENTIFY OUR ENTITY (TABLE) TO PULL FROM
-    NSEntityDescription *e = [[model entitiesByName] objectForKey:@"Task"]; // WeatherLocation is our table name
+    NSEntityDescription *e = [[model entitiesByName] objectForKey:@"Category"]; // WeatherLocation is our table name
     
     // ADD THE ENTITY (TABLE) TO THE FETCH (QUERY)
     [request setEntity:e];
@@ -110,6 +113,34 @@
 
 }
 
+-(void)loadAllTasks
+{
+    
+    // GENERATE NSFETCHREQUEST (QUERY)
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    
+    // IDENTIFY OUR ENTITY (TABLE) TO PULL FROM
+    NSEntityDescription *e = [[model entitiesByName] objectForKey:@"Task"]; // Task is our table name
+    
+    // ADD THE ENTITY (TABLE) TO THE FETCH (QUERY)
+    [request setEntity:e];
+    
+    // CREATE AN ERROR OBJECT
+    NSError *error;
+    
+    // DO IT!  FETCH THE RESULTS
+    NSArray *result = [context executeFetchRequest:request
+                                             error:&error];
+    
+    if (!result)
+    {
+        [NSException raise:@"Fetch failed!" format:@"Reason: %@", [error localizedDescription]];
+    }
+    
+    // Is this line correct??!
+    allTasks = [[NSMutableArray alloc] initWithArray:result];
+    
+}
 
 - (NSString *)itemArchivePath
 {
@@ -132,8 +163,19 @@
 }
 
 
+-(Category *)createCategory
+{
+    Category *ct = [NSEntityDescription insertNewObjectForEntityForName:@"Category" inManagedObjectContext:context];
+    
+    [allCats addObject:ct];
+    
+    return ct;
+}
+
+
 - (BOOL)saveChanges
 {
+
     NSError *error = nil;
     if (context != nil)
     {
