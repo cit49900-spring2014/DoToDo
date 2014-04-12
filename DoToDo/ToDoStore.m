@@ -84,6 +84,13 @@
     return allCats;
 }
 
+-(NSArray *)allTasks
+{
+    [self loadAllTasks];
+    
+    return allTasks; 
+}
+
 -(void)loadAllCategories
 {
     
