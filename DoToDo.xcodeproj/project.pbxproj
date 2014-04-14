@@ -22,6 +22,8 @@
 		735EBA8B18F4CF4300C121A7 /* DoToDo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 735EBA8918F4CF4300C121A7 /* DoToDo.xcdatamodeld */; };
 		73B6B7FA18F4A48900A2BE2D /* ToDoStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 73B6B7F918F4A48900A2BE2D /* ToDoStore.m */; };
 		73DE1A9D18F4A36300E23141 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73DE1A9C18F4A36300E23141 /* CoreData.framework */; };
+		761CF03A18FB815500CA4710 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 761CF03918FB815500CA4710 /* Task.m */; };
+		761CF03D18FB816E00CA4710 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 761CF03C18FB816E00CA4710 /* Category.m */; };
 		F215A72318F34C1A00DD6DD2 /* AddTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F215A72218F34C1A00DD6DD2 /* AddTaskViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +49,10 @@
 		73B6B7F818F4A48900A2BE2D /* ToDoStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoStore.h; sourceTree = "<group>"; };
 		73B6B7F918F4A48900A2BE2D /* ToDoStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoStore.m; sourceTree = "<group>"; };
 		73DE1A9C18F4A36300E23141 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		761CF03818FB815500CA4710 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
+		761CF03918FB815500CA4710 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
+		761CF03B18FB816E00CA4710 /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
+		761CF03C18FB816E00CA4710 /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
 		F215A72118F34C1A00DD6DD2 /* AddTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTaskViewController.h; sourceTree = "<group>"; };
 		F215A72218F34C1A00DD6DD2 /* AddTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTaskViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +104,10 @@
 			isa = PBXGroup;
 			children = (
 				735EBA8918F4CF4300C121A7 /* DoToDo.xcdatamodeld */,
+				761CF03B18FB816E00CA4710 /* Category.h */,
+				761CF03C18FB816E00CA4710 /* Category.m */,
+				761CF03818FB815500CA4710 /* Task.h */,
+				761CF03918FB815500CA4710 /* Task.m */,
 				73DE1A9918F4A32D00E23141 /* Singletons */,
 				4F0D1DB818ECB58700C00942 /* DoToDoAppDelegate.h */,
 				4F0D1DB918ECB58700C00942 /* DoToDoAppDelegate.m */,
@@ -225,6 +235,8 @@
 				F215A72318F34C1A00DD6DD2 /* AddTaskViewController.m in Sources */,
 				73B6B7FA18F4A48900A2BE2D /* ToDoStore.m in Sources */,
 				735EBA8B18F4CF4300C121A7 /* DoToDo.xcdatamodeld in Sources */,
+				761CF03A18FB815500CA4710 /* Task.m in Sources */,
+				761CF03D18FB816E00CA4710 /* Category.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
