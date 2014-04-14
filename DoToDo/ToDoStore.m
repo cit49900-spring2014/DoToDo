@@ -133,7 +133,9 @@
 
 -(Category *)createCategory
 {
-    Category *newCategory = [[Category alloc]init];
+    Category *newCategory = [NSEntityDescription insertNewObjectForEntityForName:@"Category" inManagedObjectContext:context];
+    
+    [allCats addObject:newCategory];
     
     return newCategory;
 }
@@ -141,8 +143,6 @@
 -(Task *)createTask
 {
     Task *newTask = [[Task alloc]init];
-    
-    
     
     
     return newTask;
