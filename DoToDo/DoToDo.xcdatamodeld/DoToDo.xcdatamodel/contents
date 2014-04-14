@@ -16,7 +16,7 @@
         <relationship name="category" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="tasks" inverseEntity="Category" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Category" positionX="0" positionY="0" width="128" height="105"/>
-        <element name="Task" positionX="0" positionY="0" width="128" height="150"/>
+        <element name="Category" positionX="-0" positionY="282" width="128" height="105"/>
+        <element name="Task" positionX="-297" positionY="36" width="128" height="150"/>
     </elements>
 </model>

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CC1A5E218FB2D5B0051688A /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC1A5E118FB2D5B0051688A /* Task.m */; };
+		2CC1A5E518FB2D850051688A /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC1A5E418FB2D850051688A /* Category.m */; };
+		2CC1A5E818FB5C8C0051688A /* DoToDoCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CC1A5E718FB5C8C0051688A /* DoToDoCategoryViewController.m */; };
 		4F0D1DAA18ECB58700C00942 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F0D1DA918ECB58700C00942 /* UIKit.framework */; };
 		4F0D1DAC18ECB58700C00942 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F0D1DAB18ECB58700C00942 /* Foundation.framework */; };
 		4F0D1DAE18ECB58700C00942 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F0D1DAD18ECB58700C00942 /* CoreGraphics.framework */; };
@@ -26,6 +29,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2CC1A5E018FB2D5B0051688A /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
+		2CC1A5E118FB2D5B0051688A /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
+		2CC1A5E318FB2D850051688A /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
+		2CC1A5E418FB2D850051688A /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
+		2CC1A5E618FB5C8C0051688A /* DoToDoCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoToDoCategoryViewController.h; sourceTree = "<group>"; };
+		2CC1A5E718FB5C8C0051688A /* DoToDoCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoToDoCategoryViewController.m; sourceTree = "<group>"; };
 		4F0D1DA618ECB58700C00942 /* DoToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F0D1DA918ECB58700C00942 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4F0D1DAB18ECB58700C00942 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -98,6 +107,10 @@
 			isa = PBXGroup;
 			children = (
 				735EBA8918F4CF4300C121A7 /* DoToDo.xcdatamodeld */,
+				2CC1A5E318FB2D850051688A /* Category.h */,
+				2CC1A5E418FB2D850051688A /* Category.m */,
+				2CC1A5E018FB2D5B0051688A /* Task.h */,
+				2CC1A5E118FB2D5B0051688A /* Task.m */,
 				73DE1A9918F4A32D00E23141 /* Singletons */,
 				4F0D1DB818ECB58700C00942 /* DoToDoAppDelegate.h */,
 				4F0D1DB918ECB58700C00942 /* DoToDoAppDelegate.m */,
@@ -143,6 +156,8 @@
 		73DE1A9B18F4A34900E23141 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2CC1A5E618FB5C8C0051688A /* DoToDoCategoryViewController.h */,
+				2CC1A5E718FB5C8C0051688A /* DoToDoCategoryViewController.m */,
 				F215A72118F34C1A00DD6DD2 /* AddTaskViewController.h */,
 				F215A72218F34C1A00DD6DD2 /* AddTaskViewController.m */,
 				4F0D1DC718ECB58700C00942 /* DoToDoViewController.h */,
@@ -225,6 +240,9 @@
 				F215A72318F34C1A00DD6DD2 /* AddTaskViewController.m in Sources */,
 				73B6B7FA18F4A48900A2BE2D /* ToDoStore.m in Sources */,
 				735EBA8B18F4CF4300C121A7 /* DoToDo.xcdatamodeld in Sources */,
+				2CC1A5E218FB2D5B0051688A /* Task.m in Sources */,
+				2CC1A5E518FB2D850051688A /* Category.m in Sources */,
+				2CC1A5E818FB5C8C0051688A /* DoToDoCategoryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

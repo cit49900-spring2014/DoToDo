@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+@class Category;
+@class Task;
+
 @interface ToDoStore : NSObject
 {
     NSMutableArray *allTasks;
