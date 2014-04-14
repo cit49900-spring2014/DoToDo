@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+@class Task;
+@class Category;
 
 @interface ToDoStore : NSObject
 {
