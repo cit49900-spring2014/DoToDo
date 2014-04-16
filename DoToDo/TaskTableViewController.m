@@ -1,26 +1,25 @@
 //
-//  CategoryTableViewController.m
+//  TaskTableViewController.m
 //  DoToDo
 //
-//  Created by Barkwill, Dakota Evan on 4/14/14.
+//  Created by Barkwill, Dakota Evan on 4/16/14.
 //  Copyright (c) 2014 Elliott, Rob. All rights reserved.
 //
 
-#import "CategoryTableViewController.h"
-#import "ToDoStore.h"
 #import "TaskTableViewController.h"
 
-@interface CategoryTableViewController ()
+@interface TaskTableViewController ()
 
 @end
 
-@implementation CategoryTableViewController
+@implementation TaskTableViewController
+@synthesize currentCategory;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        
+        // Custom initialization
     }
     return self;
 }
@@ -28,7 +27,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -37,49 +35,34 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [[self tableView] reloadData];
-}
-
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Table view data source
 
-/*- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-
+#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 1;
-}*/
+    return 0;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
-    
-    return [[[ToDoStore sharedStore] allCategories] count];
+#warning Incomplete method implementation.
+    // Return the number of rows in the section.
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
-    // Check for reusable cell
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    // If there is no reusable cell, create one
-    if (!cell)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
-    }
-    
-    // Set the text on the cell
-    Category *cat = [[[ToDoStore sharedStore] allCategories] objectAtIndex:[indexPath row]];
-    
-    [[cell textLabel] setText:[cat label]];
+    // Configure the cell...
     
     return cell;
 }
@@ -128,18 +111,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Navigation logic may go here. Create and push another view controller.
-    
-    TaskTableViewController *taskViewController = [[TaskTableViewController alloc] init];
-    // ...
-    // Pass the selected object to the new view controller.
-    
-    [taskViewController setCurrentCategory:[[[ToDoStore sharedStore] allCategories] objectAtIndex:[indexPath row]]];
-    
-    [self.navigationController pushViewController:taskViewController animated:YES];
-    
+    /*
+     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+     // ...
+     // Pass the selected object to the new view controller.
+     [self.navigationController pushViewController:detailViewController animated:YES];
+     */
 }
-
-
-
 
 @end

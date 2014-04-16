@@ -25,6 +25,7 @@
 		761CF03A18FB815500CA4710 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 761CF03918FB815500CA4710 /* Task.m */; };
 		761CF03D18FB816E00CA4710 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 761CF03C18FB816E00CA4710 /* Category.m */; };
 		7D429FF018FC8CF800C8D8C1 /* CategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D429FEF18FC8CF800C8D8C1 /* CategoryTableViewController.m */; };
+		7D4B9D0418FF3016005BD802 /* TaskTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4B9D0318FF3016005BD802 /* TaskTableViewController.m */; };
 		7DB6798D18FC843000AB5F50 /* AddCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB6798C18FC843000AB5F50 /* AddCategoryViewController.m */; };
 		F215A72318F34C1A00DD6DD2 /* AddTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F215A72218F34C1A00DD6DD2 /* AddTaskViewController.m */; };
 /* End PBXBuildFile section */
@@ -57,6 +58,8 @@
 		761CF03C18FB816E00CA4710 /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
 		7D429FEE18FC8CF800C8D8C1 /* CategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryTableViewController.h; sourceTree = "<group>"; };
 		7D429FEF18FC8CF800C8D8C1 /* CategoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryTableViewController.m; sourceTree = "<group>"; };
+		7D4B9D0218FF3016005BD802 /* TaskTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskTableViewController.h; sourceTree = "<group>"; };
+		7D4B9D0318FF3016005BD802 /* TaskTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskTableViewController.m; sourceTree = "<group>"; };
 		7DB6798B18FC843000AB5F50 /* AddCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCategoryViewController.h; sourceTree = "<group>"; };
 		7DB6798C18FC843000AB5F50 /* AddCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCategoryViewController.m; sourceTree = "<group>"; };
 		F215A72118F34C1A00DD6DD2 /* AddTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTaskViewController.h; sourceTree = "<group>"; };
@@ -164,6 +167,8 @@
 				7DB6798C18FC843000AB5F50 /* AddCategoryViewController.m */,
 				7D429FEE18FC8CF800C8D8C1 /* CategoryTableViewController.h */,
 				7D429FEF18FC8CF800C8D8C1 /* CategoryTableViewController.m */,
+				7D4B9D0218FF3016005BD802 /* TaskTableViewController.h */,
+				7D4B9D0318FF3016005BD802 /* TaskTableViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -257,6 +262,7 @@
 				761CF03D18FB816E00CA4710 /* Category.m in Sources */,
 				7DB6798D18FC843000AB5F50 /* AddCategoryViewController.m in Sources */,
 				7D429FF018FC8CF800C8D8C1 /* CategoryTableViewController.m in Sources */,
+				7D4B9D0418FF3016005BD802 /* TaskTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

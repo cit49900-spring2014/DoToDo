@@ -24,6 +24,14 @@
     if (self) {
         // Custom initialization
         [txtCategoryName setDelegate:self];
+        
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        
+        [nc addObserver:self
+               selector:@selector(finishedAddingCategory)
+                   name:NSManagedObjectContextDidSaveNotification
+                 object:[[ToDoStore sharedStore] context]
+         ];
     }
     return self;
 }
@@ -45,7 +53,6 @@
 
 - (IBAction)btnSubmit:(id)sender
 {
-    NSLog(@"TEST");
     Category *newCategory = [[ToDoStore sharedStore] createCategory];
     [newCategory setLabel:[txtCategoryName text]];
     [[ToDoStore sharedStore] saveChanges];
@@ -56,5 +63,11 @@
 {
     [textField resignFirstResponder];
     return YES;
+}
+
+- (void)finishedAddingCategory
+{
+    NSLog(@"Testing1");
+    
 }
 @end
