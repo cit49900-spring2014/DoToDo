@@ -21,6 +21,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+
     }
     return self;
 }
@@ -51,11 +53,24 @@
 - (IBAction)addCategory:(id)sender {
     
     Category *newCat = [[ToDoStore sharedStore] createCategory];
-    NSString *name = [_categoryName text];
+    NSString *name = [categoryName text];
     
     [newCat setLabel:name];
     
-    [[ToDoStore sharedStore] saveChanges]; 
+    [[ToDoStore sharedStore] saveChanges];
+    
+    //pop this view and go back to Category
+    
+    [[self navigationController]popViewControllerAnimated:YES]; 
 
 }
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField setUserInteractionEnabled:YES];
+    [textField resignFirstResponder];
+    return YES; 
+}
+
+
 @end

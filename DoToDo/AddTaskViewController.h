@@ -7,10 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+@class Category;
 
 @interface AddTaskViewController : UIViewController
-
+{
+    
+   
+}
+@property (weak, nonatomic) IBOutlet UITextField *taskLabel;
 @property (nonatomic, weak) IBOutlet UITextField *taskName;
+@property Category *category;
 //date
 - (IBAction)addTask:(id)sender;
 

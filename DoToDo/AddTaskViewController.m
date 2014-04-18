@@ -15,6 +15,7 @@
 @end
 
 @implementation AddTaskViewController
+@synthesize category; 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,11 +45,24 @@
     
     Task *newTask = [[ToDoStore sharedStore]createTask];
     
-    [newTask setLabel:@"some boring task"];
+    NSString *taskName = [_taskLabel text];
+    
+    [newTask setLabel:taskName];
+    [newTask setCategory:category];
     
     [[ToDoStore sharedStore]saveChanges]; 
+    [[self navigationController]popViewControllerAnimated:YES];
+
     
-    
-    NSLog(@"you added a task");
+    NSLog(@"%@", taskName);
 }
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField setUserInteractionEnabled:YES];
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
 @end

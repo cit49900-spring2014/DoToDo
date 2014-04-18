@@ -1,46 +1,82 @@
 //
-//  CategorysViewController.m
+//  TasksViewController.m
 //  DoToDo
 //
-//  Created by Adam Fernung on 4/12/14.
+//  Created by Adam Fernung on 4/16/14.
 //  Copyright (c) 2014 Elliott, Rob. All rights reserved.
 //
 
-#import "CategorysViewController.h"
-#import "Category.h"
-#import "ToDoStore.h"
 #import "TasksViewController.h"
+#import "AddTaskViewController.h"
+#import "Task.h"
+#import "ToDoStore.h"
+#import "DetailTaskViewController.h"
 
-@interface CategorysViewController ()
+@interface TasksViewController ()
 
 @end
 
-@implementation CategorysViewController
+@implementation TasksViewController
+@synthesize category; 
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
+        
+        
+      
         // Custom initialization
+       
     }
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [[self tableView] reloadData];
+    DetailTaskViewController *viewController=[self.storyboard instantiateViewControllerWithIdentifier:@"DetailTaskViewController"];
+    
+    NSArray *tks = [[ToDoStore sharedStore] allTasks];
+    
+    Task *selectedTask = [tks objectAtIndex:[indexPath row]];
+    
+    [viewController setDetailTask:selectedTask]; 
+    
+    [self.navigationController pushViewController:viewController animated:YES];
+    
+    
+    // TasksViewController *tk = [[TasksViewController alloc] init];
+    //
+    //    NSArray *locations = [[WeatherLocationStore sharedStore] allLocations];
+    //    WeatherLocation *selectedLocation = [locations objectAtIndex:[indexPath row]];
+    //
+    //    // Set the property of the detail VC
+    //    [detailViewController setDetailLocation:selectedLocation];
+    
+    // Push it on top of the nav controller stack
+    //[[self navigationController] pushViewController:tk animated:YES];
+    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
- 
+    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+   
 }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [[self tableView]reloadData]; 
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -50,16 +86,17 @@
 
 #pragma mark - Table view data source
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[[ToDoStore sharedStore] allCategories] count];
+    return [[[ToDoStore sharedStore] allTasks] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //NSLog(@"trying to set table cells");
+
+    
+    
     // Check for reusable cell
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
     
@@ -70,37 +107,14 @@
     }
     
     // Set the text on the cell
-    Category *ct = [[[ToDoStore sharedStore] allCategories] objectAtIndex:[indexPath row]];
+    Task *ct = [[[ToDoStore sharedStore] allTasks] objectAtIndex:[indexPath row]];
     
-    [[cell textLabel] setText:[ct label]];
-    
-    return cell;
-}
+   //NSMutableArray *tasks = [[[ToDoStore sharedStore]allTasks]];
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    TasksViewController *viewController=[self.storyboard instantiateViewControllerWithIdentifier:@"TasksViewController"];
-    
-    NSArray *cats = [[ToDoStore sharedStore] allCategories];
-    
-    Category *selectedCat = [cats objectAtIndex:[indexPath row]];
-    
-    [viewController setCategory:selectedCat];
-    
-    [self.navigationController pushViewController:viewController animated:YES];
+  
+            [[cell textLabel] setText:[ct label]];
+            return cell;
 
-
-   // TasksViewController *tk = [[TasksViewController alloc] init];
-//    
-//    NSArray *locations = [[WeatherLocationStore sharedStore] allLocations];
-//    WeatherLocation *selectedLocation = [locations objectAtIndex:[indexPath row]];
-//    
-//    // Set the property of the detail VC
-//    [detailViewController setDetailLocation:selectedLocation];
-    
-    // Push it on top of the nav controller stack
-    //[[self navigationController] pushViewController:tk animated:YES];
-    
 }
 
 
@@ -120,8 +134,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
@@ -143,6 +156,20 @@
 }
 */
 
-#pragma mark - Table view delegate
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    
+    AddTaskViewController *addController = [segue destinationViewController];
+    [addController setCategory:category]; 
+}
+
+
+
 
 @end
