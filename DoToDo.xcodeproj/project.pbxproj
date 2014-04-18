@@ -166,9 +166,9 @@
 			isa = PBXGroup;
 			children = (
 				BFB3009718FF5CA800C60A72 /* TasksViewController.h */,
+				BFB3009818FF5CA800C60A72 /* TasksViewController.m */,
 				BFC347991900B060004650FC /* DetailTaskViewController.h */,
 				BFC3479A1900B060004650FC /* DetailTaskViewController.m */,
-				BFB3009818FF5CA800C60A72 /* TasksViewController.m */,
 				BF9683DF18F98EDE00F75325 /* CategorysViewController.h */,
 				BF9683E018F98EDE00F75325 /* CategorysViewController.m */,
 				F215A72118F34C1A00DD6DD2 /* AddTaskViewController.h */,

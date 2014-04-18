@@ -37,7 +37,7 @@
 {
     DetailTaskViewController *viewController=[self.storyboard instantiateViewControllerWithIdentifier:@"DetailTaskViewController"];
     
-    NSArray *tks = [[ToDoStore sharedStore] allTasks];
+    NSArray *tks = [[ToDoStore sharedStore] allTasks:category];
     
     Task *selectedTask = [tks objectAtIndex:[indexPath row]];
     
@@ -89,7 +89,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[[ToDoStore sharedStore] allTasks] count];
+    return [[[ToDoStore sharedStore] allTasks:category] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -107,7 +107,7 @@
     }
     
     // Set the text on the cell
-    Task *ct = [[[ToDoStore sharedStore] allTasks] objectAtIndex:[indexPath row]];
+    Task *ct = [[[ToDoStore sharedStore] allTasks:category] objectAtIndex:[indexPath row]];
     
    //NSMutableArray *tasks = [[[ToDoStore sharedStore]allTasks]];
 

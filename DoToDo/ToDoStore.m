@@ -66,9 +66,8 @@
         
         // POPULATE OUR LOCAL ARRAY WITH ALL ITEMS FROM THE DATABASE
         [self loadAllCategories];
-        [self loadAllTasks]; 
+//        [self loadAllTasks]; 
         
-        NSLog(@"hello"); 
         
         
     }
@@ -84,9 +83,9 @@
     return allCats;
 }
 
--(NSArray *)allTasks
+-(NSArray *)allTasks:category
 {
-    [self loadAllTasks];
+    [self loadAllTasks:category];
     
     return allTasks; 
 }
@@ -120,7 +119,7 @@
 
 }
 
--(void)loadAllTasks
+-(void)loadAllTasks:category
 {
     
     // GENERATE NSFETCHREQUEST (QUERY)
@@ -128,6 +127,11 @@
     
     // IDENTIFY OUR ENTITY (TABLE) TO PULL FROM
     NSEntityDescription *e = [[model entitiesByName] objectForKey:@"Task"]; // Task is our table name
+    
+    //CREATE AND SET THE PREDICATE
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@",category];
+    [request setPredicate:predicate];
     
     // ADD THE ENTITY (TABLE) TO THE FETCH (QUERY)
     [request setEntity:e];

@@ -24,7 +24,7 @@
 
 // Instance methods
 -(NSArray *)allCategories;
--(NSArray *) allTasks;
+-(NSArray *) allTasks:category;
 -(Category *)createCategory;
 -(Task *)createTask;
 - (BOOL)saveChanges;
