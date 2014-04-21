@@ -135,7 +135,8 @@
     
     [taskViewController setCurrentCategory:[[[ToDoStore sharedStore] allCategories] objectAtIndex:[indexPath row]]];
     
-    [self.navigationController pushViewController:taskViewController animated:YES];
+    //[self.navigationController pushViewController:taskViewController animated:YES];
+    [self performSegueWithIdentifier:@"ViewTasks" sender:self];
     
 }
 
