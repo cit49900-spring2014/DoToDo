@@ -9,6 +9,7 @@
 #import "DoToDoCategoryViewController.h"
 #import "ToDoStore.h"
 #import "Category.h"
+#import "DoToDoTaskTableViewController.h"
 
 @interface DoToDoCategoryViewController ()
 
@@ -67,6 +68,18 @@
     [[cell textLabel]setText:[cat label]];
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    DoToDoTaskTableViewController *taskTVC = [[DoToDoTaskTableViewController alloc]init];
+    
+    Category *cat = [[[ToDoStore sharedStore]allCategories]objectAtIndex:[indexPath row]];
+    
+    [taskTVC setSelectedCategory:cat];
+    
+    [self performSegueWithIdentifier:@"ViewTasks" sender:self];
+                    
 }
 
 

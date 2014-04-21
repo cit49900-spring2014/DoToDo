@@ -142,8 +142,9 @@
 
 -(Task *)createTask
 {
-    Task *newTask = [[Task alloc]init];
+    Task *newTask = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:context];
     
+    [allTasks addObject:newTask];
     
     return newTask;
 }
