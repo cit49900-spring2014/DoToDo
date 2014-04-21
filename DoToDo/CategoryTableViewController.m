@@ -128,18 +128,29 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Navigation logic may go here. Create and push another view controller.
-    
-    TaskTableViewController *taskViewController = [[TaskTableViewController alloc] init];
-    // ...
-    // Pass the selected object to the new view controller.
-    
-    [taskViewController setCurrentCategory:[[[ToDoStore sharedStore] allCategories] objectAtIndex:[indexPath row]]];
+//    
+//    TaskTableViewController *taskViewController = [[TaskTableViewController alloc] init];
+//    // ...
+//    // Pass the selected object to the new view controller.
+//    
+//    [taskViewController setCurrentCategory:[[[ToDoStore sharedStore] allCategories] objectAtIndex:[indexPath row]]];
     
     //[self.navigationController pushViewController:taskViewController animated:YES];
     [self performSegueWithIdentifier:@"ViewTasks" sender:self];
     
 }
 
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"ViewTasks"])
+    {
+        NSIndexPath *thisIndexPath = [self.tableView indexPathForSelectedRow];
+        
+        [[segue destinationViewController] setCurrentCategory:[[[ToDoStore sharedStore] allCategories] objectAtIndex: [thisIndexPath row]]];
+       
+    }
+}
 
 
 

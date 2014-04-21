@@ -33,6 +33,13 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    NSLog(@"%@", currentCategory.label);
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [[self tableView] reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,24 +52,31 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [[[ToDoStore sharedStore] allTasks] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    // Check for reusable cell
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
     
-    // Configure the cell...
+    // If there is no reusable cell, create one
+    if (!cell)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
+    }
+    
+    // Set the text on the cell
+    Task *task = [[[ToDoStore sharedStore] tasksForCategory:currentCategory] objectAtIndex:[indexPath row]];
+    
+    [[cell textLabel] setText:[task label]];
     
     return cell;
 }
@@ -117,6 +131,14 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+        
+    [[segue destinationViewController] setCurrentCategory:currentCategory];
+        
+    
 }
 
 @end

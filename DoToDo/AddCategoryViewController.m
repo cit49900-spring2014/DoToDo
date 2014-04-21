@@ -65,9 +65,5 @@
     return YES;
 }
 
-- (void)finishedAddingCategory
-{
-    NSLog(@"Testing1");
-    
-}
+
 @end

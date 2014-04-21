@@ -7,10 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Category.h"
+#import "Task.h"
+#import "ToDoStore.h"
 
-@interface AddTaskViewController : UIViewController
+@interface AddTaskViewController : UIViewController <UITextFieldDelegate>
 
 @property (nonatomic, weak) IBOutlet UITextField *taskName;
+
+@property (nonatomic, retain) Category *currentCategory;
+
+- (IBAction)btnSubmit:(id)sender;
+
+
+
 //date
 
 

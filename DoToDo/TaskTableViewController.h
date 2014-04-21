@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Task.h"
 #import "Category.h"
+#import "ToDoStore.h"
 
 @interface TaskTableViewController : UITableViewController
 @property (nonatomic) Category *currentCategory;

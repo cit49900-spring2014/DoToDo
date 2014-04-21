@@ -88,6 +88,35 @@
     return allTasks;
 }
 
+- (NSArray *)tasksForCategory:(Category *)incomingCategory;
+{
+    // GENERATE NSFETCHREQUEST (QUERY)
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    
+    // IDENTIFY OUR ENTITY (TABLE) TO PULL FROM
+    NSEntityDescription *e = [[model entitiesByName] objectForKey:@"Task"]; // WeatherLocation is our table name
+    
+    // ADD THE ENTITY (TABLE) TO THE FETCH (QUERY)
+    [request setEntity:e];
+    
+    // CREATE AN ERROR OBJECT
+    NSError *error;
+    
+    // DO IT!  FETCH THE RESULTS
+    NSArray *result = [context executeFetchRequest:request
+                                             error:&error];
+    
+    if (!result)
+    {
+        [NSException raise:@"Fetch failed!" format:@"Reason: %@", [error localizedDescription]];
+    }
+    
+    // Is this line correct??!
+    NSArray *taskListForCategory = [[NSMutableArray alloc] initWithArray:result];
+    
+    return taskListForCategory;
+}
+
 
 - (Category *)createCategory
 {
@@ -159,7 +188,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     
     // IDENTIFY OUR ENTITY (TABLE) TO PULL FROM
-    NSEntityDescription *e = [[model entitiesByName] objectForKey:@"Category"]; // WeatherLocation is our table name
+    NSEntityDescription *e = [[model entitiesByName] objectForKey:@"Category"]; 
     
     // ADD THE ENTITY (TABLE) TO THE FETCH (QUERY)
     [request setEntity:e];
