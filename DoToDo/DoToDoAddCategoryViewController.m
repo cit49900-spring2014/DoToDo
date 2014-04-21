@@ -1,28 +1,27 @@
 //
-//  AddTaskViewController.m
+//  DoToDoAddCategoryViewController.m
 //  DoToDo
 //
-//  Created by Godin, Ryan Daniel on 4/7/14.
+//  Created by Eric Roberts on 4/14/14.
 //  Copyright (c) 2014 Elliott, Rob. All rights reserved.
 //
 
-#import "AddTaskViewController.h"
+#import "DoToDoAddCategoryViewController.h"
 #import "Category.h"
-#import "Task.h"
 #import "ToDoStore.h"
-
-@interface AddTaskViewController ()
+@interface DoToDoAddCategoryViewController ()
 
 @end
 
-@implementation AddTaskViewController
-@synthesize selectedCategory;
+@implementation DoToDoAddCategoryViewController
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        [taskNameField setDelegate:self];
+        [categoryTextField setDelegate:self];
+        
     }
     return self;
 }
@@ -47,19 +46,16 @@
     return NO;
 }
 
-- (IBAction)btnSubmit:(id)sender {
+
+- (IBAction)SubmitButton:(id)sender {
+    Category *newCategory = [[ToDoStore sharedStore]createCategory];
     
-    Task *newTask = [[ToDoStore sharedStore]createTask];
-    
-    [newTask setLabel:[taskNameField text]];
-    
-    //Insert Date
-    
-    [newTask setCategory:selectedCategory];
+    [newCategory setLabel:[categoryTextField text]];
     
     [[ToDoStore sharedStore]saveChanges];
     
     [[self navigationController]popViewControllerAnimated:YES];
-    
 }
+
+
 @end
