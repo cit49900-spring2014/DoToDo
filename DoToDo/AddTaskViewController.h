@@ -8,10 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddTaskViewController : UIViewController
+@interface AddTaskViewController : UIViewController <UITextFieldDelegate>
 
-@property (nonatomic, weak) IBOutlet UITextField *taskName;
-//date
+@property (weak, nonatomic) IBOutlet UITextField *taskName;
+
+@property (weak, nonatomic) IBOutlet UIDatePicker *taskDate;
+
+
+
+
+- (IBAction)addTask:(id)sender;
 
 
 

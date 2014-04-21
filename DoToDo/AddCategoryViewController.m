@@ -1,22 +1,21 @@
 //
-//  AddTaskViewController.m
+//  AddCategoryViewController.m
 //  DoToDo
 //
-//  Created by Godin, Ryan Daniel on 4/7/14.
+//  Created by Leadbetter, Lucas W on 4/21/14.
 //  Copyright (c) 2014 Elliott, Rob. All rights reserved.
 //
 
-#import "AddTaskViewController.h"
-#import "Task.h"
+#import "AddCategoryViewController.h"
+#import "Category.h"
 #import "ToDoStore.h"
 
-@interface AddTaskViewController ()
+@interface AddCategoryViewController ()
 
 @end
 
-@implementation AddTaskViewController
-@synthesize taskDate, taskName;
-
+@implementation AddCategoryViewController
+@synthesize categoryName;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -25,11 +24,10 @@
         
         // Add an observer so this ViewController watches for notifications
         [nc addObserver:self
-               selector:@selector(finishedAddingTask)
+               selector:@selector(finishedAddingCategory)
                    name:NSManagedObjectContextDidSaveNotification
                  object:[[ToDoStore sharedStore] context]
          ];
-
     }
     return self;
 }
@@ -38,6 +36,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [categoryName setDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,25 +45,20 @@
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction)addTask:(id)sender{
-    NSString *incName = [taskName text];
-    NSDate *incDate = [taskDate date];
+-(IBAction)addCategory:(id)sender{
+    NSString *incName = [categoryName text];
     
-    Task *newTask = [[ToDoStore sharedStore]createTask];
+    Category *nc = [[ToDoStore sharedStore]createCategory];
     
-    [newTask setDueDate:incDate];
-    [newTask setLabel:incName];
-    
+    [nc setLabel:incName];
 }
 
--(void)finishedAddingTask{
+-(void)finishedAddingCategory{
     [[self navigationController] popToRootViewControllerAnimated:YES];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
-    if(textField == self.taskName){
-        [self.taskName becomeFirstResponder];
-    }
-return YES;
+    [categoryName resignFirstResponder];
+    return YES;
 }
 @end
