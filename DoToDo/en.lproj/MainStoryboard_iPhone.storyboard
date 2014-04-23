@@ -82,7 +82,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="eAY-zz-OLZ" kind="push" identifier="ViewTask" id="7og-Ky-BVw"/>
+                                    <segue destination="eAY-zz-OLZ" kind="push" identifier="ViewTasks" id="7og-Ky-BVw"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -392,6 +392,37 @@
             <point key="canvasLocation" x="-68" y="591"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="AddTaskViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddTaskViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="btnSubmit:"/>
+                <relationship kind="outlet" name="taskNameField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="DoToDoAddCategoryViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DoToDoAddCategoryViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="SubmitButton:"/>
+                <relationship kind="outlet" name="categoryTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="DoToDoCategoryViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DoToDoCategoryViewController.h"/>
+        </class>
+        <class className="DoToDoTaskTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DoToDoTaskTableViewController.h"/>
+        </class>
+        <class className="DoToDoViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DoToDoViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="lblDevice" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

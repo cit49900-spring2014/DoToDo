@@ -31,7 +31,12 @@
     
     
     
-    
+}
+
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"Loading DoToDo View Controller");
 }
 
 - (void)didReceiveMemoryWarning
