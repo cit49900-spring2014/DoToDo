@@ -26,6 +26,7 @@
 		761CF03D18FB816E00CA4710 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 761CF03C18FB816E00CA4710 /* Category.m */; };
 		7D429FF018FC8CF800C8D8C1 /* CategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D429FEF18FC8CF800C8D8C1 /* CategoryTableViewController.m */; };
 		7D4B9D0418FF3016005BD802 /* TaskTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4B9D0318FF3016005BD802 /* TaskTableViewController.m */; };
+		7D4C094E190865A000412BDB /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D4C094D190865A000412BDB /* APIManager.m */; };
 		7DB6798D18FC843000AB5F50 /* AddCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB6798C18FC843000AB5F50 /* AddCategoryViewController.m */; };
 		F215A72318F34C1A00DD6DD2 /* AddTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F215A72218F34C1A00DD6DD2 /* AddTaskViewController.m */; };
 /* End PBXBuildFile section */
@@ -60,6 +61,8 @@
 		7D429FEF18FC8CF800C8D8C1 /* CategoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryTableViewController.m; sourceTree = "<group>"; };
 		7D4B9D0218FF3016005BD802 /* TaskTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskTableViewController.h; sourceTree = "<group>"; };
 		7D4B9D0318FF3016005BD802 /* TaskTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskTableViewController.m; sourceTree = "<group>"; };
+		7D4C094C190865A000412BDB /* APIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
+		7D4C094D190865A000412BDB /* APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		7DB6798B18FC843000AB5F50 /* AddCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCategoryViewController.h; sourceTree = "<group>"; };
 		7DB6798C18FC843000AB5F50 /* AddCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCategoryViewController.m; sourceTree = "<group>"; };
 		F215A72118F34C1A00DD6DD2 /* AddTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTaskViewController.h; sourceTree = "<group>"; };
@@ -142,6 +145,8 @@
 			isa = PBXGroup;
 			children = (
 				73B6B7F818F4A48900A2BE2D /* ToDoStore.h */,
+				7D4C094C190865A000412BDB /* APIManager.h */,
+				7D4C094D190865A000412BDB /* APIManager.m */,
 				73B6B7F918F4A48900A2BE2D /* ToDoStore.m */,
 			);
 			name = Singletons;
@@ -263,6 +268,7 @@
 				7DB6798D18FC843000AB5F50 /* AddCategoryViewController.m in Sources */,
 				7D429FF018FC8CF800C8D8C1 /* CategoryTableViewController.m in Sources */,
 				7D4B9D0418FF3016005BD802 /* TaskTableViewController.m in Sources */,
+				7D4C094E190865A000412BDB /* APIManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,7 @@
 //
 
 #import "DoToDoViewController.h"
+#import "APIManager.h"
 
 @interface DoToDoViewController ()
 
@@ -20,18 +21,11 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-    {
-        [lblDevice setText:@"I'm an iPhone"];
-    }
-    else
-    {
-        [lblDevice setText:@"I'm an iPad"];
-    }
-    
-    
-    
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [[APIManager sharedManager] validateAPIToken];
 }
 
 - (void)didReceiveMemoryWarning
