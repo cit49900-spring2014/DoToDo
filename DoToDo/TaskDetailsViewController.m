@@ -30,9 +30,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"%hd",[selectedTask remoteID]);
     lblID.text = [[NSString alloc]initWithFormat:@"%d",[selectedTask remoteID]];
-    lblDue.text = [[NSString alloc]initWithFormat:@"%@",[selectedTask dueDate]];
+    lblName.text = [selectedTask label];
     
+    NSDateFormatter *format = [[NSDateFormatter alloc]init];
+    [format setDateFormat:@"MM/dd/yyyy 'at' HH:mm"];
+    lblDue.text = [format stringFromDate:[selectedTask dueDate]];
+    
+    lblCat.text = [selectedCategory label];
 }
 
 - (void)didReceiveMemoryWarning
