@@ -9,27 +9,20 @@
 #import "AddTaskViewController.h"
 #import "Task.h"
 #import "ToDoStore.h"
+#import "Category.h"
 
 @interface AddTaskViewController ()
 
 @end
 
 @implementation AddTaskViewController
-@synthesize taskDate, taskName;
+@synthesize selectedCategory;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-        
-        // Add an observer so this ViewController watches for notifications
-        [nc addObserver:self
-               selector:@selector(finishedAddingTask)
-                   name:NSManagedObjectContextDidSaveNotification
-                 object:[[ToDoStore sharedStore] context]
-         ];
-
+        [taskName setDelegate:self];
     }
     return self;
 }
@@ -46,25 +39,28 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    NSLog(@"TextFieldShouldReturn called");
+    [textField resignFirstResponder];
+    
+    return NO;
+}
+
 -(IBAction)addTask:(id)sender{
     NSString *incName = [taskName text];
     NSDate *incDate = [taskDate date];
     
     Task *newTask = [[ToDoStore sharedStore]createTask];
-    
+    NSLog(@"%@", incDate);
     [newTask setDueDate:incDate];
     [newTask setLabel:incName];
+    [newTask setCategory:selectedCategory];
+    [[ToDoStore sharedStore]saveChanges];
+    [[self navigationController]popViewControllerAnimated:YES];
     
 }
 
--(void)finishedAddingTask{
-    [[self navigationController] popToRootViewControllerAnimated:YES];
-}
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField{
-    if(textField == self.taskName){
-        [self.taskName becomeFirstResponder];
-    }
-return YES;
-}
+
 @end

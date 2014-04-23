@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddCategoryViewController : UIViewController <UITextFieldDelegate>
-
-@property (weak, nonatomic) IBOutlet UITextField *categoryName;
+@interface AddCategoryViewController : UIViewController <UITextFieldDelegate>{
+    IBOutlet UITextField *categoryName;
+}
 
 - (IBAction)addCategory:(id)sender;
 

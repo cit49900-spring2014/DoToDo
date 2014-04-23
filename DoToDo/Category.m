@@ -7,9 +7,14 @@
 //
 
 #import "Category.h"
+#import "Task.h"
 
 @implementation Category
 
-@synthesize label, remoteID, sortOrder;
+@dynamic label;
+@dynamic remoteID;
+@dynamic sortOrder;
+@dynamic tasks;
+
 
 @end

@@ -7,14 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+@class Category;
 
-@interface AddTaskViewController : UIViewController <UITextFieldDelegate>
+@interface AddTaskViewController : UIViewController <UITextFieldDelegate>{
+    IBOutlet UITextField *taskName;
+    
+    IBOutlet UIDatePicker *taskDate;
+    
+}
 
-@property (weak, nonatomic) IBOutlet UITextField *taskName;
-
-@property (weak, nonatomic) IBOutlet UIDatePicker *taskDate;
-
-
+@property (nonatomic) Category *selectedCategory;
 
 
 - (IBAction)addTask:(id)sender;

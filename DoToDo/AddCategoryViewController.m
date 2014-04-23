@@ -15,19 +15,12 @@
 @end
 
 @implementation AddCategoryViewController
-@synthesize categoryName;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-        
-        // Add an observer so this ViewController watches for notifications
-        [nc addObserver:self
-               selector:@selector(finishedAddingCategory)
-                   name:NSManagedObjectContextDidSaveNotification
-                 object:[[ToDoStore sharedStore] context]
-         ];
+        [categoryName setDelegate:self];
     }
     return self;
 }
@@ -51,14 +44,15 @@
     Category *nc = [[ToDoStore sharedStore]createCategory];
     
     [nc setLabel:incName];
+    
+    [[ToDoStore sharedStore]saveChanges];
+    
+    [[self navigationController]popViewControllerAnimated:YES];
 }
 
--(void)finishedAddingCategory{
-    [[self navigationController] popToRootViewControllerAnimated:YES];
-}
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [categoryName resignFirstResponder];
+    [textField resignFirstResponder];
     return YES;
 }
 @end

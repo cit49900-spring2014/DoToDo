@@ -28,4 +28,7 @@
 -(Category *)createCategory;
 -(Task *)createTask;
 - (BOOL)saveChanges;
+
+-(NSArray *)categoryTasks:(Category *)category;
+
 @end

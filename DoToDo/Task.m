@@ -10,6 +10,12 @@
 
 @implementation Task
 
-@synthesize completedDate, sortOrder, remoteID, label, createdDate, dueDate;
+@dynamic completedDate;
+@dynamic createdDate;
+@dynamic dueDate;
+@dynamic label;
+@dynamic remoteID;
+@dynamic sortOrder;
+@dynamic category;
 
 @end

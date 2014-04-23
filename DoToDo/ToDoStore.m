@@ -63,8 +63,7 @@
         [context setPersistentStoreCoordinator:psc];
         
         // POPULATE OUR LOCAL ARRAYS WITH ALL ITEMS FROM THE DATABASE
-        [self loadCat];
-        [self loadTask];
+        [self allCategories];
         
     }
     
@@ -82,14 +81,14 @@
     return archivePath;
 }
 
-- (void)loadCat
+- (NSArray *)allCategories
 {
     
     // GENERATE NSFETCHREQUEST (QUERY)
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     
     // IDENTIFY OUR ENTITY (TABLE) TO PULL FROM
-    NSEntityDescription *e = [[model entitiesByName] objectForKey:@"Category"]; // WeatherLocation is our table name
+    NSEntityDescription *e = [[model entitiesByName] objectForKey:@"Category"]; 
     
     // ADD THE ENTITY (TABLE) TO THE FETCH (QUERY)
     [request setEntity:e];
@@ -108,17 +107,18 @@
     
     // Is this line correct??!
     allCats = [[NSMutableArray alloc] initWithArray:result];
+    return allCats;
     
 }
 
-- (void)loadTask
+- (NSArray *)allTasks
 {
     
     // GENERATE NSFETCHREQUEST (QUERY)
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     
     // IDENTIFY OUR ENTITY (TABLE) TO PULL FROM
-    NSEntityDescription *e = [[model entitiesByName] objectForKey:@"Task"]; // WeatherLocation is our table name
+    NSEntityDescription *e = [[model entitiesByName] objectForKey:@"Task"];
     
     // ADD THE ENTITY (TABLE) TO THE FETCH (QUERY)
     [request setEntity:e];
@@ -137,9 +137,41 @@
     
     // Is this line correct??!
     allTasks = [[NSMutableArray alloc] initWithArray:result];
-    
+    return allTasks;
 }
 
+-(NSArray *)categoryTasks:(Category *)category{
+    
+    // GENERATE NSFETCHREQUEST (QUERY)
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    
+    // IDENTIFY OUR ENTITY (TABLE) TO PULL FROM
+    NSEntityDescription *e = [[model entitiesByName] objectForKey:@"Task"];
+    
+    NSPredicate *catPlate = [NSPredicate predicateWithFormat:@"category = %@", category];
+    
+    // ADD THE ENTITY (TABLE) TO THE FETCH (QUERY)
+    [request setEntity:e];
+    [request setPredicate:catPlate];
+    
+    // CREATE AN ERROR OBJECT
+    NSError *error;
+    
+    // DO IT!  FETCH THE RESULTS
+    NSArray *result = [context executeFetchRequest:request
+                                             error:&error];
+    
+    if (!result)
+    {
+        [NSException raise:@"Fetch failed!" format:@"Reason: %@", [error localizedDescription]];
+    }
+    
+    // Is this line correct??!
+    allTasks = [[NSMutableArray alloc] initWithArray:result];
+    return allTasks;
+    
+    
+};
 - (Category *)createCategory
 {
     
@@ -158,12 +190,12 @@
 {
     
     // Make a new location from a specific entity
-    Task *task = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:context];
+    Task *ct = [NSEntityDescription insertNewObjectForEntityForName:@"Task" inManagedObjectContext:context];
     
-    [allTasks addObject:task];
+    [allTasks addObject:ct];
     
     // Return the object back to the caller
-    return task;
+    return ct;
     
     
 }

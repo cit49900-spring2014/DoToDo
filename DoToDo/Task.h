@@ -8,13 +8,16 @@
 
 #import <CoreData/CoreData.h>
 
+@class Category;
+
 @interface Task : NSManagedObject
 
 @property (nonatomic, retain) NSString *label;
 @property (nonatomic, retain) NSDate *completedDate;
 @property (nonatomic, retain) NSDate *createdDate;
 @property (nonatomic, retain) NSDate *dueDate;
-@property (nonatomic) int remoteID;
+@property (nonatomic) int16_t remoteID;
 @property (nonatomic) double sortOrder;
+@property (nonatomic, retain) Category *category;
 
 @end
