@@ -82,7 +82,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="eAY-zz-OLZ" kind="push" identifier="ViewTasks" id="7og-Ky-BVw"/>
+                                    <segue destination="eAY-zz-OLZ" kind="push" identifier="ViewTask" id="7og-Ky-BVw"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

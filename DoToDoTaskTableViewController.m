@@ -26,6 +26,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [[self tableView]reloadData];
+    NSLog(@"%@",[selectedCategory label]);
 }
 
 
@@ -48,7 +49,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[[ToDoStore sharedStore]allTasks]count];
+    return [[[ToDoStore sharedStore]TasksForCategory:selectedCategory]count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -59,13 +60,22 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
     }
     
-    Task  *aTask = [[[ToDoStore sharedStore]allTasks]objectAtIndex:[indexPath row]];
+    Task *aTask = [[[ToDoStore sharedStore]TasksForCategory:selectedCategory]objectAtIndex:[indexPath row]];
     
     //Add text to cell
     [[cell textLabel]setText:[aTask label]];
     
     return cell;
 }
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([[segue identifier]isEqualToString:@"AddTask"]){
+        
+        [[segue destinationViewController]setSelectedCategory:[self selectedCategory]];
+    }
+}
+
 
 
 

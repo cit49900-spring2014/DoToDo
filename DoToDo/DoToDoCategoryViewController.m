@@ -80,7 +80,7 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([[segue identifier]isEqualToString:@"ViewTasks"]){
+    if([[segue identifier]isEqualToString:@"ViewTask"]){
     NSIndexPath *thisIndexPath = [self.tableView indexPathForSelectedRow];
     
     Category *cat = [[[ToDoStore sharedStore]allCategories]objectAtIndex:[thisIndexPath row]];
