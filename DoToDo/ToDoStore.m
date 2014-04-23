@@ -130,6 +130,37 @@
 }
 
 
+-(NSArray *)TasksForCategory:(Category *)category
+{
+    
+    //GENERATE NSFETCHREQUEST (QUERY)
+    NSFetchRequest *request = [[NSFetchRequest alloc]init];
+    //IDENTIFY OUR ENTITY (TABLE) TO PULL FORM
+    NSEntityDescription *e = [[model entitiesByName]objectForKey:@"Task"];
+    
+    //PERFORM PREDICATE
+    NSPredicate *categoryFilter = [NSPredicate predicateWithFormat:@"category = %@",category];
+    
+    //ADD THE ENTITY (TABLE) TO THE FETCH (QUERY)
+    [request setEntity:e];
+    
+    [request setPredicate:categoryFilter];
+    //CREATE AN ERROR OBJECT
+    NSError *error;
+    //FETCH THE RESULTS
+    NSArray *result = [context executeFetchRequest:request
+                                             error:&error];
+    
+    if(!result)
+    {
+        [NSException raise:@"Fetch Failed" format:@"Reason: %@",[error localizedDescription]];
+    }
+    allTasks= [[NSMutableArray alloc]initWithArray:result];
+    
+    return allTasks;
+   
+}
+
 
 -(Category *)createCategory
 {

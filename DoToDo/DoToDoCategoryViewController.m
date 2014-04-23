@@ -72,16 +72,22 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DoToDoTaskTableViewController *taskTVC = [[DoToDoTaskTableViewController alloc]init];
-    
-    Category *cat = [[[ToDoStore sharedStore]allCategories]objectAtIndex:[indexPath row]];
-    
-    [taskTVC setSelectedCategory:cat];
     
     [self performSegueWithIdentifier:@"ViewTasks" sender:self];
-                    
+    
 }
 
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([[segue identifier]isEqualToString:@"ViewTasks"]){
+    NSIndexPath *thisIndexPath = [self.tableView indexPathForSelectedRow];
+    
+    Category *cat = [[[ToDoStore sharedStore]allCategories]objectAtIndex:[thisIndexPath row]];
+    
+    [[segue destinationViewController]setSelectedCategory:cat];
+    }
+}
 
 
 /*

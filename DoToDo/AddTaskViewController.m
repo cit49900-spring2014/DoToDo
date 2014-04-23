@@ -30,6 +30,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSLog(@"%@", [selectedCategory label]);
 	// Do any additional setup after loading the view.
 }
 
