@@ -7,6 +7,7 @@
 //
 
 #import "DoToDoViewController.h"
+#import "APIManager.h"
 
 @interface DoToDoViewController ()
 
@@ -37,6 +38,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     NSLog(@"Loading DoToDo View Controller");
+    [[APIManager sharedManager]validateAPIToken];
+    
 }
 
 - (void)didReceiveMemoryWarning
