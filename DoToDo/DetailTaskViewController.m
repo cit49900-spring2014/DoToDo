@@ -24,12 +24,14 @@
     return self;
 }
 
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    
+    [[self navigationItem] setTitle:[detailTask label]];
     [_taskName setText:[detailTask label]];
     
 }

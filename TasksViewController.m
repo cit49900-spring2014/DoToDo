@@ -46,17 +46,6 @@
     [self.navigationController pushViewController:viewController animated:YES];
     
     
-    // TasksViewController *tk = [[TasksViewController alloc] init];
-    //
-    //    NSArray *locations = [[WeatherLocationStore sharedStore] allLocations];
-    //    WeatherLocation *selectedLocation = [locations objectAtIndex:[indexPath row]];
-    //
-    //    // Set the property of the detail VC
-    //    [detailViewController setDetailLocation:selectedLocation];
-    
-    // Push it on top of the nav controller stack
-    //[[self navigationController] pushViewController:tk animated:YES];
-    
 }
 
 - (void)viewDidLoad
@@ -109,11 +98,9 @@
     // Set the text on the cell
     Task *ct = [[[ToDoStore sharedStore] allTasks:category] objectAtIndex:[indexPath row]];
     
-   //NSMutableArray *tasks = [[[ToDoStore sharedStore]allTasks]];
-
   
-            [[cell textLabel] setText:[ct label]];
-            return cell;
+    [[cell textLabel] setText:[ct label]];
+    return cell;
 
 }
 
@@ -166,7 +153,9 @@
     // Pass the selected object to the new view controller.
     
     AddTaskViewController *addController = [segue destinationViewController];
-    [addController setCategory:category]; 
+    [addController setCategory:category];
+    
+    NSLog(@"%@", [segue destinationViewController]); 
 }
 
 
