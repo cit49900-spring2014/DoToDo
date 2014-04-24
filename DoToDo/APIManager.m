@@ -42,23 +42,14 @@
     return self;
 }
 
--(void)apiLogin:(NSString *)username password:(NSString *)password{
-    NSString *urlString = [NSString stringWithFormat:@"http://dotodo-rob.herokuapp.com/api/v1/users/login"];
-    
-    NSLog(@"%@", urlString);
-    
+-(void)apiLogin:(NSString *)incUsername password:(NSString *)incPassword{
+    password = incPassword;
+    username = incUsername;
+    NSString *loginURL = @"/users/login";
+    NSString *urlString = [NSString stringWithFormat:@"http://dotodo-rob.herokuapp.com/api/v1%@",loginURL];
     NSURL *url = [NSURL URLWithString:urlString];
-    NSDictionary* jsonLogin = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"username",username,
-                               @"password",password,
-                               nil];
-    
-    NSData *jsonInputData = [NSJSONSerialization dataWithJSONObject:jsonLogin options:kNilOptions error:nil];
+
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request setHTTPBody:jsonInputData];
     
     // Clear out existing connection if there is one
     if (connectionInProgress) {
@@ -70,8 +61,17 @@
     connectionInProgress = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
     
     jsonData = [[NSMutableData alloc] init];
-    NSLog(@"%@", jsonData);
-    
+}
+
+-(void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge{
+    if([challenge previousFailureCount]==0){
+        NSURLCredential *newCredential;
+        newCredential = [NSURLCredential credentialWithUser:username
+                                                   password:password
+                                                persistence:NSURLCredentialPersistenceNone];
+        [[challenge sender] useCredential:newCredential forAuthenticationChallenge:challenge];
+        
+    }
     
 }
 -(void)validateAPIToken{
@@ -129,7 +129,12 @@
      */
 }
 
-
+-(void)saveSat{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setObject:[jsonObject objectForKey:@"single_access_token"] forKey:@"api_token"];
+    [prefs synchronize];
+    NSLog(@"Saved API token");
+}
 
 -(void)apiLookupTasks{
     
@@ -195,6 +200,7 @@
     [jsonData appendData:data];
 }
 
+
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     
@@ -205,22 +211,18 @@
     //NSLog(@"%@", jsonCheck);
     
     jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
-    
-    //NSLog(@"%@", jsonObject);
-    
+        
     NSRange rangeValue = [apiRequestString rangeOfString:@"first_name" options:NSCaseInsensitiveSearch];
     
-    if (rangeValue.location == NSNotFound) {
+    if (rangeValue.location == !NSNotFound) {
         
-        //conditions / forecast
-        //[self saveConditions];
-        NSLog(@"Conditions data found");
+        [self saveSat];
         
     }
     
     else {
         
-        //geolookup data
+        NSLog(@"%@",[jsonObject objectForKey:@"single_access_token"]);
         NSLog(@"Geolookup data found");
         //[self saveLocation];
         

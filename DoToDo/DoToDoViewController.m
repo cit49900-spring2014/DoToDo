@@ -29,7 +29,7 @@
         [lblDevice setText:@"I'm an iPad"];
     }
     
-    [[APIManager sharedManager]apiLogin:@"lleadbet1" password:@"iphone"];
+    [[APIManager sharedManager]apiLogin:@"lleadbet" password:@"iphone"];
     
     
     

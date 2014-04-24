@@ -17,6 +17,8 @@
     NSString *apiRequestString;
     NSDictionary *jsonObject;
     NSString *apiKey;
+    NSString *username;
+    NSString *password;
 }
 
 // CLASS METHOD FOR SINGLETON
