@@ -49,6 +49,7 @@
     
     [newTask setLabel:taskName];
     [newTask setCategory:category];
+    [newTask setDueDate:[_dueDate date]];
     
     [[ToDoStore sharedStore]saveChanges]; 
     [[self navigationController]popViewControllerAnimated:YES];

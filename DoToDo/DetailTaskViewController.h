@@ -14,5 +14,6 @@
 @property Task *detailTask;
 @property (weak, nonatomic) IBOutlet UILabel *taskName;
 @property (weak, nonatomic) IBOutlet UILabel *categoryID;
+@property (weak, nonatomic) IBOutlet UILabel *dueDate;
 
 @end

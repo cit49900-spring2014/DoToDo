@@ -1,0 +1,141 @@
+//
+//  APIManager.m
+//  jagweather
+//
+//  Created by Elliott, Rob on 3/10/14.
+//  Copyright (c) 2014 Rob Elliott. All rights reserved.
+//
+
+#import "APIManager.h"
+
+@implementation APIManager
+
+// CLASS METHODS -- TO SET UP SINGLETON FUNCTIONALITY
+
++ (APIManager *)sharedManager
+{
+    static APIManager *sharedManager = nil;
+    if (!sharedManager)
+        sharedManager = [[super allocWithZone:nil] init];
+    
+    return sharedManager;
+}
+
++ (id)allocWithZone:(NSZone *)zone
+{
+    return [self sharedManager];
+}
+
+// INITIALIZER
+- (id)init
+{
+    self = [super init];
+    
+    if(self)
+    {
+        // SET serviceURL
+        //serviceURL = @"http://dotodo-rob.herokuapp.com/api/v1";
+        serviceURL = @"http://localhost:3000/api/v1";
+    }
+    
+    return self;
+}
+
+
+// CUSTOM METHODS
+- (void)validateLogin:(NSString *)incomingUsername :(NSString *)incomingPassword
+{
+    NSLog(@"hittiign validate login"); 
+       
+    NSString *urlString = [NSString stringWithFormat:@"http://%@:%@@localhost:3000/api/v1/users/login", incomingUsername,incomingPassword];
+    
+    //NSString *urlString = @"http://adam:austin@dotodo-rob.herokuapp.com/api/v1/users/login";
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSLog(@"%@", urlString);
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    //clear out existing connection if there is one
+    if(connectionInProgress)
+    {
+        [connectionInProgress cancel];
+        
+    }
+    
+    //create and init the NSURLConnection
+    
+    connectionInProgress = [[NSURLConnection alloc]initWithRequest:request delegate:self startImmediately:YES];
+    
+    //set up our NSMutableData
+    jsonData = [[NSMutableData alloc]init];
+    
+    NSLog(@"%@", jsonData); 
+  
+}
+
+
+-(void)validateAPIToken
+{
+    NSLog(@"validate apit token is getting ran"); 
+    NSString *api_token;
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    
+//    api_token = [prefs objectForKey:@"api_token"];
+
+    api_token = @"vWbU0kYTAfyrri4AAaR";
+    
+    apiRequestString = [NSString stringWithFormat:@"users/validate_token/%@", api_token];
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@", serviceURL,apiRequestString];
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSLog(@"%@", urlString);
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    //clear out existing connection if there is one
+    if(connectionInProgress)
+    {
+        [connectionInProgress cancel];
+        
+    }
+    
+    //create and init the NSURLConnection
+    
+    connectionInProgress = [[NSURLConnection alloc]initWithRequest:request delegate:self startImmediately:YES];
+    
+    //set up our NSMutableData
+    jsonData = [[NSMutableData alloc]init];
+    
+}
+
+
+// DELEGATE METHODS FOR NSURLCONNECTION
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    //NSLog(@"Connection didReceiveData");
+    [jsonData appendData:data];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    
+    NSLog(@"Connection finished.");
+    
+    jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+    
+    //NSLog(@"here is the validate stuff:  %@", jsonObject);
+    NSLog(@"Response from login validation: %@", jsonObject);
+
+
+
+}
+
+
+
+
+@end

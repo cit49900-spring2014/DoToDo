@@ -31,8 +31,11 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    NSString *date = [NSString stringWithFormat:@"%@",[detailTask dueDate]]; 
+    
     [[self navigationItem] setTitle:[detailTask label]];
     [_taskName setText:[detailTask label]];
+    [_dueDate setText:date];
     
 }
 

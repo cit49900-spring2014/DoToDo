@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface DoToDoViewController : UIViewController
 
 
+@property (weak, nonatomic) IBOutlet UITextField *username;
+@property (weak, nonatomic) IBOutlet UITextField *password;
 @property (weak, nonatomic) IBOutlet UILabel *lblDevice;
+- (IBAction)login:(id)sender;
 
 @end
