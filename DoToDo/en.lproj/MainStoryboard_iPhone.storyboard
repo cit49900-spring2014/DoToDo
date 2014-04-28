@@ -12,11 +12,6 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="iPhone" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7oZ-68-Hnm">
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lMZ-Lw-KrA">
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Login">
@@ -27,6 +22,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="login:" destination="2" eventType="touchUpInside" id="fAc-Oj-bl2"/>
                                     <segue destination="6Ke-6I-Iho" kind="push" id="uhH-gs-pYw"/>
                                 </connections>
                             </button>
@@ -36,28 +32,33 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="2" id="2RX-wJ-7Fm"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Password" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Fq-Yz-KVE">
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="2" id="Caw-M8-h3o"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="RVS-aP-alE" firstAttribute="top" secondItem="3" secondAttribute="top" constant="64" id="7KF-df-Ax9"/>
                             <constraint firstItem="RVS-aP-alE" firstAttribute="leading" secondItem="6Fq-Yz-KVE" secondAttribute="leading" type="default" id="Ig0-pi-fWW"/>
                             <constraint firstItem="lMZ-Lw-KrA" firstAttribute="centerX" secondItem="3" secondAttribute="centerX" type="default" id="MPF-G6-h0p"/>
-                            <constraint firstItem="7oZ-68-Hnm" firstAttribute="top" secondItem="3" secondAttribute="top" constant="136" id="VYJ-nG-CPP"/>
+                            <constraint firstItem="lMZ-Lw-KrA" firstAttribute="top" secondItem="3" secondAttribute="top" constant="195" id="NUI-E0-P7D"/>
                             <constraint firstItem="6Fq-Yz-KVE" firstAttribute="trailing" secondItem="RVS-aP-alE" secondAttribute="trailing" type="default" id="dQ7-UI-WUB"/>
-                            <constraint firstAttribute="bottom" secondItem="6Fq-Yz-KVE" secondAttribute="bottom" constant="197" id="dqg-dJ-AEH"/>
                             <constraint firstItem="RVS-aP-alE" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="82" id="hey-ma-GPf"/>
-                            <constraint firstAttribute="bottom" secondItem="lMZ-Lw-KrA" secondAttribute="bottom" constant="107" id="j9e-DE-k1D"/>
-                            <constraint firstItem="RVS-aP-alE" firstAttribute="top" secondItem="3" secondAttribute="top" constant="223" id="myQ-3a-YYo"/>
-                            <constraint firstItem="lMZ-Lw-KrA" firstAttribute="centerX" secondItem="7oZ-68-Hnm" secondAttribute="centerX" type="default" id="nKw-uk-qmM"/>
+                            <constraint firstItem="6Fq-Yz-KVE" firstAttribute="top" secondItem="3" secondAttribute="top" constant="118" id="kAt-Q8-Yyu"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="J0Y-0u-Bpp"/>
                     <connections>
-                        <outlet property="lblDevice" destination="7oZ-68-Hnm" id="YXX-Iq-KRA"/>
+                        <outlet property="txtPassword" destination="6Fq-Yz-KVE" id="j72-Lg-2Xa"/>
+                        <outlet property="txtUsername" destination="RVS-aP-alE" id="E79-Ms-xvr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
@@ -401,7 +402,10 @@
         <class className="DoToDoViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DoToDoViewController.h"/>
             <relationships>
+                <relationship kind="action" name="login:"/>
                 <relationship kind="outlet" name="lblDevice" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="txtPassword" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="txtUsername" candidateClass="UITextField"/>
             </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">

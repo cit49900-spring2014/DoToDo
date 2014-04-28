@@ -16,6 +16,8 @@
     NSMutableData *jsonData;
     NSString *apiRequestString;
     NSDictionary *jsonObject;
+    NSString *username;
+    NSString *password;
 }
 
 

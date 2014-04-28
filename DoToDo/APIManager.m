@@ -76,8 +76,45 @@
     NSLog(@"%@", jsonData);
 }
 
+- (void)validateLoginWithUsername:(NSString *)incomingUsername andPassword:(NSString *)incomingPassword
+{
+    username = incomingUsername;
+    password = incomingPassword;
+    
+    apiRequestString = [NSString stringWithFormat:@"users/login"];
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@", serviceURL, apiRequestString];
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
+    
+    if (connectionInProgress){
+        [connectionInProgress cancel];
+    }
+    
+    connectionInProgress = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+    
+    jsonData = [[NSMutableData alloc] init];
+    
+    //START WATCHING NSNOTIFICATIONCENTER
+    
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(recievedLoginInformation)
+               name:@"LoginValidation"
+             object:nil];
+}
 
-
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+{
+    NSURLCredential *credential = [NSURLCredential credentialWithUser:username password:password persistence:NSURLCredentialPersistenceNone];
+    NSURLProtectionSpace *protectionSpace = [[NSURLProtectionSpace alloc] initWithHost:@"herokuapp.com" port:0 protocol:@"http" realm:nil authenticationMethod:nil];
+    [[NSURLCredentialStorage sharedCredentialStorage] setDefaultCredential:credential forProtectionSpace:protectionSpace];
+    
+    [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
+}
 
 
 
