@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+@class Task;
+@class Category;
 
 @interface ToDoStore : NSObject
 {
@@ -26,4 +28,7 @@
 -(Category *)createCategory;
 -(Task *)createTask;
 - (BOOL)saveChanges;
+
+-(NSArray *)categoryTasks:(Category *)category;
+
 @end

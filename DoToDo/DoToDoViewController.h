@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "APIManager.h"
 
-@interface DoToDoViewController : UIViewController
+@interface DoToDoViewController : UIViewController <UITextFieldDelegate>
 
 
 @property (weak, nonatomic) IBOutlet UILabel *lblDevice;
+@property (weak, nonatomic) IBOutlet UITextField *txtUsername;
+@property (weak, nonatomic) IBOutlet UITextField *txtPassword;
 
 @end
