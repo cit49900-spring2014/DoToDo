@@ -13,7 +13,7 @@
 @end
 
 @implementation DoToDoViewController
-@synthesize lblDevice;
+@synthesize lblDevice,txtUsername,txtPassword;
 
 - (void)viewDidLoad
 {
@@ -30,6 +30,8 @@
     }
     
     [[APIManager sharedManager]apiLogin:@"lleadbet" password:@"iphone"];
+    [txtUsername setDelegate:self];
+    [txtPassword setDelegate:self];
     
     
     
@@ -40,6 +42,14 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    NSLog(@"TextFieldShouldReturn called");
+    [textField resignFirstResponder];
+    
+    return NO;
 }
 
 @end

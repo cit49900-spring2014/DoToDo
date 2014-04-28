@@ -57,10 +57,18 @@
         [connectionInProgress cancel];
     }
     
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(receivedLoginInformation)
+               name:@"LoginValidation"
+             object:nil];
+    
+    
     // Create and initiate the NSURLConnection
     connectionInProgress = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
     
     jsonData = [[NSMutableData alloc] init];
+    NSLog(@"%@",jsonObject);
 }
 
 -(void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge{
@@ -69,8 +77,12 @@
         newCredential = [NSURLCredential credentialWithUser:username
                                                    password:password
                                                 persistence:NSURLCredentialPersistenceNone];
-        [[challenge sender] useCredential:newCredential forAuthenticationChallenge:challenge];
+        NSURLProtectionSpace *ps = [[NSURLProtectionSpace alloc] initWithHost:@"herokuapp.com" port:0 protocol:@"http" realm:nil authenticationMethod:nil];
         
+        
+        [[NSURLCredentialStorage sharedCredentialStorage]setDefaultCredential:newCredential forProtectionSpace:ps];
+        
+        [[challenge sender] useCredential:newCredential forAuthenticationChallenge:challenge];
     }
     
 }
@@ -131,7 +143,8 @@
 
 -(void)saveSat{
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    [prefs setObject:[jsonObject objectForKey:@"single_access_token"] forKey:@"api_token"];
+    NSLog(@"%@",[jsonObject valueForKey:@"single_access_token"]);
+    [prefs setObject:[jsonObject valueForKey:@"single_access_token"] forKey:@"api_token"];
     [prefs synchronize];
     NSLog(@"Saved API token");
 }
@@ -212,7 +225,7 @@
     
     jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
         
-    NSRange rangeValue = [apiRequestString rangeOfString:@"first_name" options:NSCaseInsensitiveSearch];
+    NSRange rangeValue = [apiRequestString rangeOfString:@"single_access_token" options:NSCaseInsensitiveSearch];
     
     if (rangeValue.location == !NSNotFound) {
         
