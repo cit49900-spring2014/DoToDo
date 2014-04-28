@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0460"
+   LastUpgradeVersion = "0500"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -17,7 +17,7 @@
                BlueprintIdentifier = "4F0D1DA518ECB58700C00942"
                BuildableName = "DoToDo.app"
                BlueprintName = "DoToDo"
-               ReferencedContainer = "container:DoToDo.xcodeproj">
+               ReferencedContainer = "container:dotodo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
             BlueprintIdentifier = "4F0D1DA518ECB58700C00942"
             BuildableName = "DoToDo.app"
             BlueprintName = "DoToDo"
-            ReferencedContainer = "container:DoToDo.xcodeproj">
+            ReferencedContainer = "container:dotodo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -54,7 +54,7 @@
             BlueprintIdentifier = "4F0D1DA518ECB58700C00942"
             BuildableName = "DoToDo.app"
             BlueprintName = "DoToDo"
-            ReferencedContainer = "container:DoToDo.xcodeproj">
+            ReferencedContainer = "container:dotodo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -72,7 +72,7 @@
             BlueprintIdentifier = "4F0D1DA518ECB58700C00942"
             BuildableName = "DoToDo.app"
             BlueprintName = "DoToDo"
-            ReferencedContainer = "container:DoToDo.xcodeproj">
+            ReferencedContainer = "container:dotodo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

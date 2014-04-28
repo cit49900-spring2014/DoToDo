@@ -9,6 +9,7 @@
 #import "DoToDoCategoryViewController.h"
 #import "ToDoStore.h"
 #import "Category.h"
+#import "DoToDoTaskTableViewController.h"
 
 @interface DoToDoCategoryViewController ()
 
@@ -69,6 +70,24 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    [self performSegueWithIdentifier:@"ViewTasks" sender:self];
+    
+}
+
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([[segue identifier]isEqualToString:@"ViewTask"]){
+    NSIndexPath *thisIndexPath = [self.tableView indexPathForSelectedRow];
+    
+    Category *cat = [[[ToDoStore sharedStore]allCategories]objectAtIndex:[thisIndexPath row]];
+    
+    [[segue destinationViewController]setSelectedCategory:cat];
+    }
+}
 
 
 /*
