@@ -5,6 +5,12 @@
 //  Created by Elliott, Rob on 3/10/14.
 //  Copyright (c) 2014 Rob Elliott. All rights reserved.
 //
+//  connectionIdentifier Mappings
+//  1 - Validate API Token
+//  2 - Validate Login with Username
+//  3 - Fetch Categories
+//  4 - Fetch Tasks
+
 
 #import "APIManager.h"
 
@@ -49,11 +55,10 @@
     NSString *api_token;
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
-    [prefs setObject:@"0kInlH0g85eUXYWc28ei" forKey:@"api_token"];
-    
     api_token = [prefs objectForKey:@"api_token"];
     
     apiRequestString = [NSString stringWithFormat:@"users/validate_token/%@", api_token];
+    connectionIdentifier = 1;
     
     NSString *urlString = [NSString stringWithFormat:@"%@/%@", serviceURL, apiRequestString];
     
@@ -73,7 +78,6 @@
     connectionInProgress = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
     
     jsonData = [[NSMutableData alloc] init];
-    NSLog(@"%@", jsonData);
 }
 
 - (void)validateLoginWithUsername:(NSString *)incomingUsername andPassword:(NSString *)incomingPassword
@@ -82,6 +86,7 @@
     password = incomingPassword;
     
     apiRequestString = [NSString stringWithFormat:@"users/login"];
+    connectionIdentifier = 2;
     
     NSString *urlString = [NSString stringWithFormat:@"%@/%@", serviceURL, apiRequestString];
     
@@ -128,15 +133,32 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     NSLog(@"Connection finished.");
     
     jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
     
+    NSLog(@"%@",jsonObject);
     
-    NSRange rangeValue = [apiRequestString rangeOfString:@"geolookup" options:NSCaseInsensitiveSearch];
-    
-   
+    if (connectionIdentifier == 1){
+        if ([[jsonObject valueForKey:@"id"] intValue] != 0){
+            NSLog(@"User is Valid");
+             
+            [prefs setObject:[jsonObject valueForKey:@"id"] forKey:@"user_id"];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"tokenValidated" object:nil];
+        } else {
+            NSLog(@"User is invalid");
+            [prefs removeObjectForKey:@"api_token"];
+            [prefs removeObjectForKey:@"id"];
+        }
+        
+    }else if (connectionIdentifier == 2){
+        NSLog(@"User logged in successfully.");
+        [prefs setObject:[jsonObject valueForKey:@"single_access_token"] forKey:@"api_token"];
+        
+        NSLog(@"%@",[prefs objectForKey:@"api_token"]);
+    }
     
 }
 

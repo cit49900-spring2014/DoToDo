@@ -28,6 +28,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [[APIManager sharedManager] validateAPIToken];
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(api_validated) name:@"tokenValidated" object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,5 +48,22 @@
 {
     [textField resignFirstResponder];
     return YES;
+}
+
+- (void)api_validated
+{
+    NSLog(@"Finally got there!");
+    
+    
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"ViewTasks"])
+    {
+        
+        [[segue destinationViewController]];
+        
+    }
 }
 @end

@@ -18,6 +18,7 @@
     NSDictionary *jsonObject;
     NSString *username;
     NSString *password;
+    int connectionIdentifier;
 }
 
 
