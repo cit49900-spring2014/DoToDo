@@ -8,6 +8,7 @@
 
 #import "DoToDoViewController.h"
 #import "APIManager.h"
+#import "CategorysViewController.h"
 
 @interface DoToDoViewController ()
 
@@ -41,22 +42,93 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     NSLog(@"in view will appear");
-    [[APIManager sharedManager]validateAPIToken]; 
+
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+
+    //if there's an api token in user defaults
+    
+    if([prefs objectForKey:@"api_token"])
+    {
+        //executle validation to validate it
+        [[APIManager sharedManager]validateAPIToken];
+
+        //register as an observer
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc addObserver:self
+               selector:@selector(receivedTokenValidation)
+                   name:@"TokenValidation"
+                 object:nil];
+    }else{
+        
+        //user is going to enter username /password (stay on this screen)
+        
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc addObserver:self
+               selector:@selector(loginFailed)
+                   name:@"LoginFailed"
+                 object:nil];
+        
+        NSNotificationCenter *nc2 = [NSNotificationCenter defaultCenter];
+        [nc addObserver:self
+               selector:@selector(loginSucceed)
+                   name:@"LoginSucceeded"
+                 object:nil];
+
+    }
+    
     
 }
 
 - (IBAction)login:(id)sender {
-    NSString *username = [NSString stringWithFormat:@"%@",[_username text]];
-    NSString *password = [NSString stringWithFormat:@"%@",[_password text]];
+    NSString *username1 = [NSString stringWithFormat:@"%@",[username text]];
+    NSString *password1 = [NSString stringWithFormat:@"%@",[password text]];
     
-//    NSLog(@"%@", username);
-//    NSLog(@"%@", password); 
-    
-    [[APIManager sharedManager]validateLogin:username :password];
+    NSLog(@"%@", username1);
+    NSLog(@"%@", password1);
+   
+    [[APIManager sharedManager] validateLogin:username1 :password1];
     
 }
 
-// CHECK OUT WHY VIEW FRAME IS SWITCHING BEFORE THE REQUEST IS DONE. LOOK INTO NOTIFICATION CENTER
+-(void)loginSucceed
+{
+    NSLog(@"in login succeeded");
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    
+    if ([prefs objectForKey:@"api_token"]) {
+//        CategorysViewController *newVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CategoriesViewController"];
+//        [self.navigationController pushViewController:newVC animated:YES];
+        
+        [self performSegueWithIdentifier:@"loginSegue" sender:self]; 
+    }
+    
+}
+
+-(void)loginFailed
+{
+    [lblfail setHidden:NO];
+    
+}
+
+-(void)receivedTokenValidation
+{
+    NSLog(@"in TokenValidation function");
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+
+       if([prefs objectForKey:@"api_token"])
+       {
+//           CategorysViewController *newVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CategoriesViewController"];
+//           [self.navigationController pushViewController:newVC animated:YES];
+           
+           [self performSegueWithIdentifier:@"loginSegue" sender:self]; 
+           
+       }
+}
+
+
+
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -64,5 +136,7 @@
     [textField resignFirstResponder];
     return YES;
 }
+
+
 
 @end

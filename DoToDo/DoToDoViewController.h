@@ -10,11 +10,18 @@
 
 
 @interface DoToDoViewController : UIViewController
+{
+    
+    __weak IBOutlet UITextField *username;
+    __weak IBOutlet UITextField *password;
+    __weak IBOutlet UILabel *lblfail;
+}
 
 
-@property (weak, nonatomic) IBOutlet UITextField *username;
-@property (weak, nonatomic) IBOutlet UITextField *password;
 @property (weak, nonatomic) IBOutlet UILabel *lblDevice;
 - (IBAction)login:(id)sender;
+-(void)receivedTokenValidation;
+-(void)loginFailed;
+-(void)loginSucceed; 
 
 @end

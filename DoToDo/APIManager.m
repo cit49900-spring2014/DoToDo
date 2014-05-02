@@ -34,8 +34,8 @@
     if(self)
     {
         // SET serviceURL
-        //serviceURL = @"http://dotodo-rob.herokuapp.com/api/v1";
-        serviceURL = @"http://localhost:3000/api/v1";
+        serviceURL = @"http://dotodo-rob.herokuapp.com/api/v1";
+        //serviceURL = @"http://localhost:3000/api/v1";
     }
     
     return self;
@@ -45,48 +45,80 @@
 // CUSTOM METHODS
 - (void)validateLogin:(NSString *)incomingUsername :(NSString *)incomingPassword
 {
-    NSLog(@"hittiign validate login"); 
-       
-    NSString *urlString = [NSString stringWithFormat:@"http://%@:%@@localhost:3000/api/v1/users/login", incomingUsername,incomingPassword];
+    connectionIdentifier = 2;
+    username = incomingUsername;
+    password = incomingPassword;
     
-    //NSString *urlString = @"http://adam:austin@dotodo-rob.herokuapp.com/api/v1/users/login";
+    NSString *urlString = @"http://dotodo-rob.herokuapp.com/api/v1/users/login";
+    apiRequestString = urlString;
     
     NSURL *url = [NSURL URLWithString:urlString];
-    
+   
     NSLog(@"%@", urlString);
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    
-    //clear out existing connection if there is one
-    if(connectionInProgress)
-    {
-        [connectionInProgress cancel];
-        
-    }
-    
-    //create and init the NSURLConnection
-    
-    connectionInProgress = [[NSURLConnection alloc]initWithRequest:request delegate:self startImmediately:YES];
-    
-    //set up our NSMutableData
-    jsonData = [[NSMutableData alloc]init];
+   
+   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+   
+   //clear out existing connection if there is one
+   if(connectionInProgress)
+   {
+       [connectionInProgress cancel];
+       
+   }
+   
+   //create and init the NSURLConnection
+   
+   connectionInProgress = [[NSURLConnection alloc]initWithRequest:request delegate:self startImmediately:YES];
+   
+   //set up our NSMutableData
+   jsonData = [[NSMutableData alloc]init];
+   
+    // START WATCHING NSNOTIFICATION CENTER
     
     NSLog(@"%@", jsonData); 
   
 }
 
+-(void)connection:(NSURLConnection *)connection
+didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+{
+    //if previous failure count is > 0
+    //post a notification for failed login
+    //kill the nsurl connection
+
+    
+    if ([challenge previousFailureCount] == 0) {
+        NSURLCredential *newCred = [NSURLCredential credentialWithUser:username
+                                                              password:password
+                                                           persistence:NSURLCredentialPersistenceNone];
+        
+        NSURLProtectionSpace *protectionSpace = [[NSURLProtectionSpace alloc] initWithHost:@"herokuapp.com" port:0 protocol:@"http" realm:nil authenticationMethod:nil];
+        
+        [[NSURLCredentialStorage sharedCredentialStorage]setDefaultCredential:newCred forProtectionSpace:protectionSpace];
+        
+        [challenge.sender useCredential:newCred forAuthenticationChallenge:challenge];
+        
+    
+    } else {
+        [[challenge sender] cancelAuthenticationChallenge:challenge];
+        [connection cancel];
+        
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"LoginFailed" object:nil];
+  
+    }
+    
+}
 
 -(void)validateAPIToken
 {
-    NSLog(@"validate apit token is getting ran"); 
+    connectionIdentifier = 1;
+    NSLog(@"validate apit token is getting ran");
     NSString *api_token;
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
-//    api_token = [prefs objectForKey:@"api_token"];
+    api_token = [prefs objectForKey:@"api_token"];
 
-    api_token = @"vWbU0kYTAfyrri4AAaR";
     
-    apiRequestString = [NSString stringWithFormat:@"users/validate_token/%@", api_token];
+    apiRequestString = [NSString stringWithFormat:@"users/%@/validate_token", api_token];
     
     NSString *urlString = [NSString stringWithFormat:@"%@/%@", serviceURL,apiRequestString];
     
@@ -128,8 +160,42 @@
     
     jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
     
-    //NSLog(@"here is the validate stuff:  %@", jsonObject);
-    NSLog(@"Response from login validation: %@", jsonObject);
+    if(connectionIdentifier == 1)
+    {
+        // DO THE VALIDATE API TOKEN STUFF HERE
+        
+        NSLog(@"%@", jsonObject);
+        
+        NSString *incoming_user_id;
+        
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        
+        incoming_user_id = [jsonObject objectForKey:@"id"];
+        
+        if (incoming_user_id == 0)
+        {
+            [prefs removeObjectForKey:@"api_token"];
+        }
+        
+        //post a notification that we have received token validation
+        
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"TokenValidation" object:nil];
+    }
+    
+    else if (connectionIdentifier == 2) {
+        
+      //SET THE DEFAULT DATA
+            
+            NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+            [prefs setObject:[jsonObject objectForKey:@"single_access_token"] forKey:@"api_token"];
+
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"LoginSucceeded" object:nil];
+
+        
+            NSLog(@"%@", [[NSUserDefaults standardUserDefaults] stringForKey:@"api_token"]);
+        
+    }
+
 
 
 

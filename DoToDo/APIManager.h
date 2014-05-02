@@ -9,13 +9,16 @@
 #import <Foundation/Foundation.h>
 
 
-@interface APIManager : NSObject
+@interface APIManager : NSObject <NSURLConnectionDelegate>
 {
     NSString *serviceURL;
     NSURLConnection *connectionInProgress;
     NSMutableData *jsonData;
     NSString *apiRequestString;
     NSDictionary *jsonObject;
+    NSString *username;
+    NSString *password;
+    int connectionIdentifier; 
 }
 
 
@@ -25,6 +28,6 @@
 
 
 - (void)validateAPIToken;
-- (void)validateLogin:(NSString *)incomingUsername :(NSString *)incomingPassword; 
+- (void)validateLogin:(NSString *)incomingUsername :(NSString *)incomingPassword;
 
 @end

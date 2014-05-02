@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Ugb-xN-vf2">
     <dependencies>
+        <deployment defaultVersion="1552" identifier="iOS"/>
         <development version="4600" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -24,7 +25,7 @@
                                 </state>
                                 <connections>
                                     <action selector="login:" destination="2" eventType="touchUpInside" id="8RW-dP-YtE"/>
-                                    <segue destination="6Ke-6I-Iho" kind="push" id="uhH-gs-pYw"/>
+                                    <segue destination="6Ke-6I-Iho" kind="push" identifier="loginSegue" id="at4-cz-KSb"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Username" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RVS-aP-alE">
@@ -44,22 +45,30 @@
                                     <outlet property="delegate" destination="2" id="qZZ-ct-8HS"/>
                                 </connections>
                             </textField>
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Login Failed" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iv0-0N-Dli">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="6Fq-Yz-KVE" firstAttribute="top" secondItem="3" secondAttribute="top" constant="135" id="FHE-Hr-43M"/>
                             <constraint firstItem="lMZ-Lw-KrA" firstAttribute="top" secondItem="3" secondAttribute="top" constant="212" id="GRk-su-2MU"/>
                             <constraint firstItem="RVS-aP-alE" firstAttribute="leading" secondItem="6Fq-Yz-KVE" secondAttribute="leading" type="default" id="Ig0-pi-fWW"/>
-                            <constraint firstItem="lMZ-Lw-KrA" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="117" id="K6p-Yp-sfU"/>
+                            <constraint firstItem="iv0-0N-Dli" firstAttribute="centerX" secondItem="3" secondAttribute="centerX" type="default" id="JBD-1t-bCQ"/>
                             <constraint firstItem="RVS-aP-alE" firstAttribute="top" secondItem="3" secondAttribute="top" constant="81" id="bnL-We-2MP"/>
                             <constraint firstItem="6Fq-Yz-KVE" firstAttribute="trailing" secondItem="RVS-aP-alE" secondAttribute="trailing" type="default" id="dQ7-UI-WUB"/>
-                            <constraint firstItem="6Fq-Yz-KVE" firstAttribute="centerX" secondItem="3" secondAttribute="centerX" type="default" id="xs4-0j-tw1"/>
+                            <constraint firstItem="lMZ-Lw-KrA" firstAttribute="centerX" secondItem="6Fq-Yz-KVE" secondAttribute="centerX" type="default" id="f0i-tX-pNv"/>
+                            <constraint firstItem="iv0-0N-Dli" firstAttribute="centerX" secondItem="RVS-aP-alE" secondAttribute="centerX" type="default" id="pv9-en-3wZ"/>
+                            <constraint firstItem="iv0-0N-Dli" firstAttribute="top" secondItem="3" secondAttribute="top" constant="20" symbolic="YES" type="default" id="sPr-T8-UtA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="J0Y-0u-Bpp"/>
                     <connections>
-                        <outlet property="password" destination="6Fq-Yz-KVE" id="QIS-R4-Ukv"/>
-                        <outlet property="username" destination="RVS-aP-alE" id="o2W-qQ-vSP"/>
+                        <outlet property="lblfail" destination="iv0-0N-Dli" id="ncV-t0-PDm"/>
+                        <outlet property="password" destination="6Fq-Yz-KVE" id="CYM-oY-Ing"/>
+                        <outlet property="username" destination="RVS-aP-alE" id="LhI-Gr-gJr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
@@ -125,7 +134,7 @@
         <!--Categorys View Controller - Categories-->
         <scene sceneID="IRz-dk-hib">
             <objects>
-                <tableViewController id="6Ke-6I-Iho" customClass="CategorysViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="CategoriesViewController" id="6Ke-6I-Iho" customClass="CategorysViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="LkA-9c-Tmq">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
