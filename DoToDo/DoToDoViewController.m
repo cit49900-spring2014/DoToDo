@@ -97,10 +97,10 @@
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
     if ([prefs objectForKey:@"api_token"]) {
-//        CategorysViewController *newVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CategoriesViewController"];
-//        [self.navigationController pushViewController:newVC animated:YES];
+       CategorysViewController *newVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CategoriesViewController"];
+       [self.navigationController pushViewController:newVC animated:YES];
         
-        [self performSegueWithIdentifier:@"loginSegue" sender:self]; 
+        
     }
     
 }
@@ -119,10 +119,10 @@
 
        if([prefs objectForKey:@"api_token"])
        {
-//           CategorysViewController *newVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CategoriesViewController"];
-//           [self.navigationController pushViewController:newVC animated:YES];
+           CategorysViewController *newVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CategoriesViewController"];
+           [self.navigationController pushViewController:newVC animated:YES];
            
-           [self performSegueWithIdentifier:@"loginSegue" sender:self]; 
+           
            
        }
 }
@@ -136,6 +136,7 @@
     [textField resignFirstResponder];
     return YES;
 }
+
 
 
 
