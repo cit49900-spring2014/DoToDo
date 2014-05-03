@@ -10,6 +10,7 @@
 #import "Category.h"
 #import "ToDoStore.h"
 #import "TasksViewController.h"
+#import "APIManager.h"
 
 @interface CategorysViewController ()
 
@@ -28,6 +29,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [[APIManager sharedManager] getCategories]; 
     [[self tableView] reloadData];
     
 }

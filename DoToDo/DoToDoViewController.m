@@ -42,14 +42,26 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     NSLog(@"in view will appear");
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(loginFailed)
+               name:@"LoginFailed"
+             object:nil];
+    
+    NSNotificationCenter *nc2 = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(loginSucceed)
+               name:@"LoginSucceeded"
+             object:nil];
 
     
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
 
     //if there's an api token in user defaults
-    
+ 
     if([prefs objectForKey:@"api_token"])
-    {
+    { 
         //executle validation to validate it
         [[APIManager sharedManager]validateAPIToken];
 
@@ -59,22 +71,7 @@
                selector:@selector(receivedTokenValidation)
                    name:@"TokenValidation"
                  object:nil];
-    }else{
-        
-        //user is going to enter username /password (stay on this screen)
-        
-        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-        [nc addObserver:self
-               selector:@selector(loginFailed)
-                   name:@"LoginFailed"
-                 object:nil];
-        
-        NSNotificationCenter *nc2 = [NSNotificationCenter defaultCenter];
-        [nc addObserver:self
-               selector:@selector(loginSucceed)
-                   name:@"LoginSucceeded"
-                 object:nil];
-
+     
     }
     
     
@@ -100,7 +97,6 @@
        CategorysViewController *newVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CategoriesViewController"];
        [self.navigationController pushViewController:newVC animated:YES];
         
-        
     }
     
 }
@@ -117,12 +113,10 @@
     
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
 
-       if([prefs objectForKey:@"api_token"])
+       if ([prefs objectForKey:@"api_token"])
        {
            CategorysViewController *newVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CategoriesViewController"];
            [self.navigationController pushViewController:newVC animated:YES];
-           
-           
            
        }
 }

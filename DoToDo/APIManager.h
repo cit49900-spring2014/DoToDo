@@ -29,5 +29,5 @@
 
 - (void)validateAPIToken;
 - (void)validateLogin:(NSString *)incomingUsername :(NSString *)incomingPassword;
-
+-(void)getCategories; 
 @end

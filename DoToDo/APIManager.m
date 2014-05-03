@@ -116,7 +116,8 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
     api_token = [prefs objectForKey:@"api_token"];
-
+    
+    //api_token = @"a;sldkfja;ldkfj";
     
     apiRequestString = [NSString stringWithFormat:@"users/%@/validate_token", api_token];
     
@@ -144,6 +145,37 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
     
 }
 
+-(void)getCategories
+{
+    NSString *api_token;
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    
+    api_token = [prefs objectForKey:@"api_token"];
+    
+    apiRequestString = [NSString stringWithFormat:@"categories/%@", api_token];
+    connectionIdentifier = 3; // Identifier for validate_token
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@", serviceURL, apiRequestString];
+    
+    NSLog(@"%@", urlString);
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    // Clear out existing connection if there is one
+    if (connectionInProgress) {
+        NSLog(@"There's a connection in progress.");
+        [connectionInProgress cancel];
+    }
+    
+    // Create and initiate the NSURLConnection
+    connectionInProgress = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+    
+    jsonData = [[NSMutableData alloc] init];
+}
+
 
 // DELEGATE METHODS FOR NSURLCONNECTION
 
@@ -166,15 +198,17 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
         
         NSLog(@"%@", jsonObject);
         
-        NSString *incoming_user_id;
+        NSNumber *incoming_user_id;
         
         NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
         
         incoming_user_id = [jsonObject objectForKey:@"id"];
+        NSLog(@"%@", incoming_user_id);
         
-        if (incoming_user_id == 0)
+        if ([incoming_user_id integerValue] == 0)
         {
             [prefs removeObjectForKey:@"api_token"];
+            [prefs synchronize]; 
         }
         
         //post a notification that we have received token validation
@@ -188,17 +222,15 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
             
             NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
             [prefs setObject:[jsonObject objectForKey:@"single_access_token"] forKey:@"api_token"];
+            [prefs synchronize]; 
 
             [[NSNotificationCenter defaultCenter]postNotificationName:@"LoginSucceeded" object:nil];
 
         
-            NSLog(@"%@", [[NSUserDefaults standardUserDefaults] stringForKey:@"api_token"]);
-        
+    }else if (connectionIdentifier==3)
+    {
+        NSLog(@"%@", jsonObject); 
     }
-
-
-
-
 }
 
 
