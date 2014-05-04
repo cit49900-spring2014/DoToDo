@@ -7,6 +7,8 @@
 //
 
 #import "DoToDoViewController.h"
+#import "APIManager.h"
+#import "CategorysViewController.h"
 
 @interface DoToDoViewController ()
 
@@ -29,9 +31,6 @@
         [lblDevice setText:@"I'm an iPad"];
     }
     
-    
-    
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -39,5 +38,100 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"in view will appear");
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(loginFailed)
+               name:@"LoginFailed"
+             object:nil];
+    
+    NSNotificationCenter *nc2 = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(loginSucceed)
+               name:@"LoginSucceeded"
+             object:nil];
+
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+
+    //if there's an api token in user defaults
+ 
+    if([prefs objectForKey:@"api_token"])
+    { 
+        //executle validation to validate it
+        [[APIManager sharedManager]validateAPIToken];
+
+        //register as an observer
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc addObserver:self
+               selector:@selector(receivedTokenValidation)
+                   name:@"TokenValidation"
+                 object:nil];
+     
+    }
+    
+    
+}
+
+- (IBAction)login:(id)sender {
+    NSString *username1 = [NSString stringWithFormat:@"%@",[username text]];
+    NSString *password1 = [NSString stringWithFormat:@"%@",[password text]];
+    
+    NSLog(@"%@", username1);
+    NSLog(@"%@", password1);
+   
+    [[APIManager sharedManager] validateLogin:username1 :password1];
+    
+}
+
+-(void)loginSucceed
+{
+    NSLog(@"in login succeeded");
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    
+    if ([prefs objectForKey:@"api_token"]) {
+       CategorysViewController *newVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CategoriesViewController"];
+       [self.navigationController pushViewController:newVC animated:YES];
+        
+    }
+    
+}
+
+-(void)loginFailed
+{
+    [lblfail setHidden:NO];
+    
+}
+
+-(void)receivedTokenValidation
+{
+    NSLog(@"in TokenValidation function");
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+
+       if ([prefs objectForKey:@"api_token"])
+       {
+           CategorysViewController *newVC = [self.storyboard instantiateViewControllerWithIdentifier:@"CategoriesViewController"];
+           [self.navigationController pushViewController:newVC animated:YES];
+           
+       }
+}
+
+
+
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField setUserInteractionEnabled:YES];
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
+
 
 @end

@@ -22,6 +22,13 @@
 		735EBA8B18F4CF4300C121A7 /* DoToDo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 735EBA8918F4CF4300C121A7 /* DoToDo.xcdatamodeld */; };
 		73B6B7FA18F4A48900A2BE2D /* ToDoStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 73B6B7F918F4A48900A2BE2D /* ToDoStore.m */; };
 		73DE1A9D18F4A36300E23141 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73DE1A9C18F4A36300E23141 /* CoreData.framework */; };
+		BF0A999718F8DE5E001FBB38 /* AddCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF0A999618F8DE5E001FBB38 /* AddCategoryViewController.m */; };
+		BF1B74A218F61CA9000D8082 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1B74A118F61CA9000D8082 /* Task.m */; };
+		BF1B74A518F61CD4000D8082 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = BF1B74A418F61CD4000D8082 /* Category.m */; };
+		BF354A90190865D200650913 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BF354A8F190865D200650913 /* APIManager.m */; };
+		BF9683E118F98EDE00F75325 /* CategorysViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF9683E018F98EDE00F75325 /* CategorysViewController.m */; };
+		BFB3009918FF5CA800C60A72 /* TasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFB3009818FF5CA800C60A72 /* TasksViewController.m */; };
+		BFC3479B1900B060004650FC /* DetailTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFC3479A1900B060004650FC /* DetailTaskViewController.m */; };
 		F215A72318F34C1A00DD6DD2 /* AddTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F215A72218F34C1A00DD6DD2 /* AddTaskViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +54,20 @@
 		73B6B7F818F4A48900A2BE2D /* ToDoStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToDoStore.h; sourceTree = "<group>"; };
 		73B6B7F918F4A48900A2BE2D /* ToDoStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToDoStore.m; sourceTree = "<group>"; };
 		73DE1A9C18F4A36300E23141 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		BF0A999518F8DE5E001FBB38 /* AddCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCategoryViewController.h; sourceTree = "<group>"; };
+		BF0A999618F8DE5E001FBB38 /* AddCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCategoryViewController.m; sourceTree = "<group>"; };
+		BF1B74A018F61CA9000D8082 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
+		BF1B74A118F61CA9000D8082 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
+		BF1B74A318F61CD4000D8082 /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Category.h; path = ../Category.h; sourceTree = "<group>"; };
+		BF1B74A418F61CD4000D8082 /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Category.m; path = ../Category.m; sourceTree = "<group>"; };
+		BF354A8E190865D200650913 /* APIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
+		BF354A8F190865D200650913 /* APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
+		BF9683DF18F98EDE00F75325 /* CategorysViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategorysViewController.h; path = ../CategorysViewController.h; sourceTree = "<group>"; };
+		BF9683E018F98EDE00F75325 /* CategorysViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategorysViewController.m; path = ../CategorysViewController.m; sourceTree = "<group>"; };
+		BFB3009718FF5CA800C60A72 /* TasksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TasksViewController.h; path = ../TasksViewController.h; sourceTree = "<group>"; };
+		BFB3009818FF5CA800C60A72 /* TasksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TasksViewController.m; path = ../TasksViewController.m; sourceTree = "<group>"; };
+		BFC347991900B060004650FC /* DetailTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTaskViewController.h; sourceTree = "<group>"; };
+		BFC3479A1900B060004650FC /* DetailTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTaskViewController.m; sourceTree = "<group>"; };
 		F215A72118F34C1A00DD6DD2 /* AddTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTaskViewController.h; sourceTree = "<group>"; };
 		F215A72218F34C1A00DD6DD2 /* AddTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTaskViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,6 +125,10 @@
 				73DE1A9A18F4A33F00E23141 /* Storyboards */,
 				73DE1A9B18F4A34900E23141 /* ViewControllers */,
 				4F0D1DB018ECB58700C00942 /* Supporting Files */,
+				BF1B74A018F61CA9000D8082 /* Task.h */,
+				BF1B74A118F61CA9000D8082 /* Task.m */,
+				BF1B74A318F61CD4000D8082 /* Category.h */,
+				BF1B74A418F61CD4000D8082 /* Category.m */,
 			);
 			path = DoToDo;
 			sourceTree = "<group>";
@@ -143,8 +168,18 @@
 		73DE1A9B18F4A34900E23141 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				BFB3009718FF5CA800C60A72 /* TasksViewController.h */,
+				BFB3009818FF5CA800C60A72 /* TasksViewController.m */,
+				BFC347991900B060004650FC /* DetailTaskViewController.h */,
+				BFC3479A1900B060004650FC /* DetailTaskViewController.m */,
+				BF354A8E190865D200650913 /* APIManager.h */,
+				BF354A8F190865D200650913 /* APIManager.m */,
+				BF9683DF18F98EDE00F75325 /* CategorysViewController.h */,
+				BF9683E018F98EDE00F75325 /* CategorysViewController.m */,
 				F215A72118F34C1A00DD6DD2 /* AddTaskViewController.h */,
 				F215A72218F34C1A00DD6DD2 /* AddTaskViewController.m */,
+				BF0A999518F8DE5E001FBB38 /* AddCategoryViewController.h */,
+				BF0A999618F8DE5E001FBB38 /* AddCategoryViewController.m */,
 				4F0D1DC718ECB58700C00942 /* DoToDoViewController.h */,
 				4F0D1DC818ECB58700C00942 /* DoToDoViewController.m */,
 			);
@@ -220,11 +255,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F0D1DB618ECB58700C00942 /* main.m in Sources */,
+				BFB3009918FF5CA800C60A72 /* TasksViewController.m in Sources */,
 				4F0D1DBA18ECB58700C00942 /* DoToDoAppDelegate.m in Sources */,
 				4F0D1DC918ECB58700C00942 /* DoToDoViewController.m in Sources */,
 				F215A72318F34C1A00DD6DD2 /* AddTaskViewController.m in Sources */,
 				73B6B7FA18F4A48900A2BE2D /* ToDoStore.m in Sources */,
 				735EBA8B18F4CF4300C121A7 /* DoToDo.xcdatamodeld in Sources */,
+				BF1B74A218F61CA9000D8082 /* Task.m in Sources */,
+				BF0A999718F8DE5E001FBB38 /* AddCategoryViewController.m in Sources */,
+				BF1B74A518F61CD4000D8082 /* Category.m in Sources */,
+				BF9683E118F98EDE00F75325 /* CategorysViewController.m in Sources */,
+				BFC3479B1900B060004650FC /* DetailTaskViewController.m in Sources */,
+				BF354A90190865D200650913 /* APIManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
