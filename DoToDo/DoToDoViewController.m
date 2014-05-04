@@ -7,6 +7,7 @@
 //
 
 #import "DoToDoViewController.h"
+#import "CategoryTableViewController.h"
 #import "APIManager.h"
 
 @interface DoToDoViewController ()
@@ -27,10 +28,16 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [[APIManager sharedManager] validateAPIToken];
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(api_validated) name:@"tokenValidated" object:nil];
+    
+    if ([prefs objectForKey:@"api_token"]){
+        [[APIManager sharedManager] validateAPIToken];
+        
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc addObserver:self selector:@selector(api_validated) name:@"tokenValidated" object:nil];
+        [nc addObserver:self selector:@selector(api_invalid) name:@"tokenInvalidated" object:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,8 +47,11 @@
 }
 
 - (IBAction)login:(id)sender {
-    NSLog(@"Login Clicked");
     [[APIManager sharedManager] validateLoginWithUsername:[txtUsername text] andPassword:[txtPassword text]];
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(login_success) name:@"loginValid" object:nil];
+    [nc addObserver:self selector:@selector(login_fail) name:@"loginInvalid" object:nil];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -52,18 +62,26 @@
 
 - (void)api_validated
 {
-    NSLog(@"Finally got there!");
-    
+    [[APIManager sharedManager] fetchCategories];
+    [self performSegueWithIdentifier:@"CategoriesVC" sender:[NSNotificationCenter defaultCenter]];
     
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)login_success
 {
-    if([segue.identifier isEqualToString:@"ViewTasks"])
-    {
-        
-        [[segue destinationViewController]];
-        
-    }
+    [[APIManager sharedManager] fetchCategories];
+    [self performSegueWithIdentifier:@"CategoriesVC" sender:[NSNotificationCenter defaultCenter]];
 }
+
+- (void)login_fail
+{
+    [txtMessage setText:@"Login unsuccessful.\nPlease try again."];
+}
+
+- (void)api_invalid
+{
+    [txtMessage setText:@"You have been logged out.\nPlease login to continue."];
+}
+
+
 @end

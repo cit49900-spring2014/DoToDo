@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>AEE5B0B6-BFEC-4335-9E17-69E4F58073C0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>DoToDo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>863D2B49-85F3-4061-99DC-BAB13AEDF7AF</key>
+		<string>https://github.com/dbarkwil/DoToDo-1.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>DoToDo.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>863D2B49-85F3-4061-99DC-BAB13AEDF7AF</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/dbarkwil/DoToDo-1.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>863D2B49-85F3-4061-99DC-BAB13AEDF7AF</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>863D2B49-85F3-4061-99DC-BAB13AEDF7AF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DoToDo-1</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -13,6 +13,8 @@
     __weak IBOutlet UITextField *txtUsername;
     
     __weak IBOutlet UITextField *txtPassword;
+    
+    __weak IBOutlet UILabel *txtMessage;
 }
 
 

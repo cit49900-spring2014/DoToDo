@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Category.h"
 
 
 @interface APIManager : NSObject
@@ -19,6 +20,7 @@
     NSString *username;
     NSString *password;
     int connectionIdentifier;
+    Category *currentCategory;
 }
 
 
@@ -27,5 +29,7 @@
 
 - (void)validateAPIToken;
 - (void)validateLoginWithUsername:(NSString *)incomingUsername andPassword:(NSString *)incomingPassword;
+- (void)fetchCategories;
+- (void)fetchTasksByCategory:(Category *)incomingCategory;
 
 @end

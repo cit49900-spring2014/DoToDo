@@ -9,6 +9,7 @@
 #import "CategoryTableViewController.h"
 #import "ToDoStore.h"
 #import "TaskTableViewController.h"
+#import "APIManager.h"
 
 @interface CategoryTableViewController ()
 
@@ -20,9 +21,13 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        
     }
     return self;
+}
+
+- (void)reloadCategories
+{
+    [[self tableView] reloadData];
 }
 
 - (void)viewDidLoad
@@ -35,6 +40,8 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(reloadCategories) name:@"addedCategory" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -78,6 +85,7 @@
     
     // Set the text on the cell
     Category *cat = [[[ToDoStore sharedStore] allCategories] objectAtIndex:[indexPath row]];
+    
     
     [[cell textLabel] setText:[cat label]];
     
@@ -146,6 +154,8 @@
     if([segue.identifier isEqualToString:@"ViewTasks"])
     {
         NSIndexPath *thisIndexPath = [self.tableView indexPathForSelectedRow];
+        
+        [[APIManager sharedManager] fetchTasksByCategory:[[[ToDoStore sharedStore] allCategories] objectAtIndex: [thisIndexPath row]]];
         
         [[segue destinationViewController] setCurrentCategory:[[[ToDoStore sharedStore] allCategories] objectAtIndex: [thisIndexPath row]]];
        

@@ -33,11 +33,18 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(reloadTasks) name:@"addedTask" object:nil];
     
     NSLog(@"%@", currentCategory.label);
 }
 
 - (void)viewWillAppear:(BOOL)animated
+{
+    [[self tableView] reloadData];
+}
+
+- (void)reloadTasks
 {
     [[self tableView] reloadData];
 }
@@ -59,7 +66,11 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[[ToDoStore sharedStore] allTasks] count];
+    
+    NSLog(@"%lu", (unsigned long)[[[ToDoStore sharedStore] tasksForCategory:currentCategory] count]);
+    
+    return [[[ToDoStore sharedStore] tasksForCategory:currentCategory] count];
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -74,7 +85,7 @@
     }
     
     // Set the text on the cell
-    Task *task = [[[ToDoStore sharedStore] tasksForCategory:currentCategory] objectAtIndex:[indexPath row]];
+    Task *task = [[[ToDoStore sharedStore] allTasks] objectAtIndex:[indexPath row]];
     
     [[cell textLabel] setText:[task label]];
     
@@ -142,3 +153,4 @@
 }
 
 @end
+
