@@ -122,6 +122,8 @@
         [[[ToDoStore sharedStore] context] deleteObject:task];
     }
     
+    [[ToDoStore sharedStore] saveChanges];
+    
     [txtPassword setHidden:false];
     [txtUsername setHidden:false];
     

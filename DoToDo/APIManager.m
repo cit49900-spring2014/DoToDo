@@ -216,28 +216,44 @@
         NSLog(@"%@",[prefs objectForKey:@"api_token"]);
         [[NSNotificationCenter defaultCenter] postNotificationName:@"loginValid" object:nil];
     }else if (connectionIdentifier == 3){
-        NSLog(@"Categories");
-        NSArray *allCategories = [NSArray arrayWithObject:jsonObject];
-        for (NSArray *category in [allCategories objectAtIndex:0]){
-            Category *newCategory = [[ToDoStore sharedStore] createCategory];
-            [newCategory setLabel:[category valueForKey:@"label"]];
-            [newCategory setRemoteID:[[category valueForKey:@"id"] integerValue]];
-            [[ToDoStore sharedStore] saveChanges];
-            
-        }
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"addedCategory" object:nil];
+        
+        [self saveCategories];
+        
     }else if (connectionIdentifier == 4){
-        NSArray *allTasks = [NSArray arrayWithObject:jsonObject];
-        for (NSArray *task in [allTasks objectAtIndex:0]){
-            Task *newTask = [[ToDoStore sharedStore] createTask];
-            [newTask setLabel:[task valueForKey:@"label"]];
-            [newTask setRemoteID:[[task valueForKey:@"id"] integerValue]];
-            [newTask setCategory:currentCategory];
-            [[ToDoStore sharedStore] saveChanges];
-        }
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"addedTask" object:nil];
+        
+        [self saveTasks];
+        
     }
     
+}
+
+- (void)saveCategories
+{
+    for (id newCategory in jsonObject){
+        Category *newStoredCategory = [[ToDoStore sharedStore] createCategory];
+        [newStoredCategory setLabel:[newCategory objectForKey:@"label"]];
+        [newStoredCategory setRemoteID:[[newCategory objectForKey:@"id"] integerValue]];
+        
+    }
+    
+    [[ToDoStore sharedStore] saveChanges];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"addedCategory" object:nil];
+}
+
+- (void)saveTasks
+{
+    for (id newTask in jsonObject){
+        Task *newStoredTask = [[ToDoStore sharedStore] createTask];
+        [newStoredTask setLabel:[newTask objectForKey:@"label"]];
+        [newStoredTask setRemoteID:[[newTask objectForKey:@"id"] integerValue]];
+        [newStoredTask setCategory:currentCategory];
+    }
+    
+
+    [[ToDoStore sharedStore] saveChanges];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"addedTask" object:nil];
 }
 
 
