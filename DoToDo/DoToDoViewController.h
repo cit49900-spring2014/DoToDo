@@ -8,9 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DoToDoViewController : UIViewController
+@interface DoToDoViewController : UIViewController <UITextFieldDelegate>
+{
+    __weak IBOutlet UITextField *txtUsername;
+    
+    __weak IBOutlet UITextField *txtPassword;
+    
+    __weak IBOutlet UILabel *txtMessage;
+    __weak IBOutlet UIButton *btnLogin;
+}
 
 
 @property (weak, nonatomic) IBOutlet UILabel *lblDevice;
 
+- (IBAction)login:(id)sender;
+- (void)logOutUser;
 @end

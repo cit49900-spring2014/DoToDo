@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Category.h"
+#import "Task.h"
 
 @interface ToDoStore : NSObject
 {
@@ -22,7 +24,8 @@
 
 // Instance methods
 -(NSArray *)allCategories;
--(NSArray *) allTasks;
+-(NSArray *)allTasks;
+-(NSArray *)tasksForCategory:(Category *)incomingCategory;
 -(Category *)createCategory;
 -(Task *)createTask;
 - (BOOL)saveChanges;
