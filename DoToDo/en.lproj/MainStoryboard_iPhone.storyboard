@@ -67,6 +67,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="J0Y-0u-Bpp"/>
                     <connections>
+                        <outlet property="btnLogin" destination="lMZ-Lw-KrA" id="8E5-yZ-8sn"/>
                         <outlet property="txtMessage" destination="ASk-Gi-a76" id="2uQ-Fr-PuI"/>
                         <outlet property="txtPassword" destination="6Fq-Yz-KVE" id="j72-Lg-2Xa"/>
                         <outlet property="txtUsername" destination="RVS-aP-alE" id="E79-Ms-xvr"/>
@@ -233,6 +234,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add Task" id="7zh-EL-CSX"/>
+                    <connections>
+                        <outlet property="taskName" destination="VHb-rp-lkG" id="vyT-QI-8sd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kKR-WY-W4t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -247,7 +251,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Tlo-1N-j7W">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Ai3-3o-wgb">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -426,6 +430,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DoToDoViewController.h"/>
             <relationships>
                 <relationship kind="action" name="login:"/>
+                <relationship kind="outlet" name="btnLogin" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="lblDevice" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="txtMessage" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="txtPassword" candidateClass="UITextField"/>

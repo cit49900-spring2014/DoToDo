@@ -211,6 +211,7 @@
     }else if (connectionIdentifier == 2){
         NSLog(@"User logged in successfully.");
         [prefs setObject:[jsonObject valueForKey:@"single_access_token"] forKey:@"api_token"];
+        [prefs setObject:[jsonObject valueForKey:@"username"] forKey:@"username"];
         
         NSLog(@"%@",[prefs objectForKey:@"api_token"]);
         [[NSNotificationCenter defaultCenter] postNotificationName:@"loginValid" object:nil];

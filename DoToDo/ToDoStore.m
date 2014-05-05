@@ -90,31 +90,31 @@
 
 - (NSArray *)tasksForCategory:(Category *)incomingCategory;
 {
-    // GENERATE NSFETCHREQUEST (QUERY)
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    //GENERATE NSFETCHREQUEST (QUERY)
+    NSFetchRequest *request = [[NSFetchRequest alloc]init];
+    //IDENTIFY OUR ENTITY (TABLE) TO PULL FORM
+    NSEntityDescription *e = [[model entitiesByName]objectForKey:@"Task"];
     
-    // IDENTIFY OUR ENTITY (TABLE) TO PULL FROM
-    NSEntityDescription *e = [[model entitiesByName] objectForKey:@"Task"]; // WeatherLocation is our table name
+    //PERFORM PREDICATE
+    NSPredicate *categoryFilter = [NSPredicate predicateWithFormat:@"category = %@",incomingCategory];
     
-    // ADD THE ENTITY (TABLE) TO THE FETCH (QUERY)
+    //ADD THE ENTITY (TABLE) TO THE FETCH (QUERY)
     [request setEntity:e];
     
-    // CREATE AN ERROR OBJECT
+    [request setPredicate:categoryFilter];
+    //CREATE AN ERROR OBJECT
     NSError *error;
-    
-    // DO IT!  FETCH THE RESULTS
+    //FETCH THE RESULTS
     NSArray *result = [context executeFetchRequest:request
                                              error:&error];
     
-    if (!result)
+    if(!result)
     {
-        [NSException raise:@"Fetch failed!" format:@"Reason: %@", [error localizedDescription]];
+        [NSException raise:@"Fetch Failed" format:@"Reason: %@",[error localizedDescription]];
     }
+    allTasks= [[NSMutableArray alloc]initWithArray:result];
     
-    // Is this line correct??!
-    NSArray *taskListForCategory = [[NSMutableArray alloc] initWithArray:result];
-    
-    return taskListForCategory;
+    return allTasks;
 }
 
 

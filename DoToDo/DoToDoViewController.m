@@ -9,6 +9,9 @@
 #import "DoToDoViewController.h"
 #import "CategoryTableViewController.h"
 #import "APIManager.h"
+#import "Category.h"
+#import "ToDoStore.h"
+#import "Task.h"
 
 @interface DoToDoViewController ()
 
@@ -24,10 +27,6 @@
     [txtPassword setDelegate:self];
     [txtUsername setDelegate:self];
     
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
     
@@ -37,6 +36,22 @@
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         [nc addObserver:self selector:@selector(api_validated) name:@"tokenValidated" object:nil];
         [nc addObserver:self selector:@selector(api_invalid) name:@"tokenInvalidated" object:nil];
+        [txtPassword setHidden:true];
+        [txtUsername setHidden:true];
+        [txtMessage setText:[NSString stringWithFormat:@"Logged in as:\n %@ \n ...", [prefs objectForKey:@"username"]]];
+        [btnLogin setTitle:@"Log Out" forState:UIControlStateNormal];
+    }
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    if ([prefs objectForKey:@"api_token"]){
+        [txtPassword setHidden:true];
+        [txtUsername setHidden:true];
+        [txtMessage setText:[NSString stringWithFormat:@"Logged in as:\n %@ \n ...", [prefs objectForKey:@"username"]]];
+        [btnLogin setTitle:@"Log Out" forState:UIControlStateNormal];
     }
 }
 
@@ -47,11 +62,19 @@
 }
 
 - (IBAction)login:(id)sender {
-    [[APIManager sharedManager] validateLoginWithUsername:[txtUsername text] andPassword:[txtPassword text]];
+     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(login_success) name:@"loginValid" object:nil];
-    [nc addObserver:self selector:@selector(login_fail) name:@"loginInvalid" object:nil];
+    if ([prefs valueForKey:@"api_token"]) {
+        
+        [self logOutUser];
+        
+    }else{
+        [[APIManager sharedManager] validateLoginWithUsername:[txtUsername text] andPassword:[txtPassword text]];
+        
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc addObserver:self selector:@selector(login_success) name:@"loginValid" object:nil];
+        [nc addObserver:self selector:@selector(login_fail) name:@"loginInvalid" object:nil];
+    }
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -81,6 +104,29 @@
 - (void)api_invalid
 {
     [txtMessage setText:@"You have been logged out.\nPlease login to continue."];
+}
+
+- (void)logOutUser
+{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    
+    [prefs removeObjectForKey:@"api_token"];
+    [prefs removeObjectForKey:@"id"];
+    [prefs removeObjectForKey:@"username"];
+    
+    for (Category *category in [[ToDoStore sharedStore] allCategories]){
+        [[[ToDoStore sharedStore] context] deleteObject:category];
+    }
+    
+    for (Task *task in [[ToDoStore sharedStore] allTasks]){
+        [[[ToDoStore sharedStore] context] deleteObject:task];
+    }
+    
+    [txtPassword setHidden:false];
+    [txtUsername setHidden:false];
+    
+    [txtMessage setText:@"Logged Out"];
+    [btnLogin setTitle:@"Log In" forState:UIControlStateNormal];
 }
 
 

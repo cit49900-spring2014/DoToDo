@@ -15,10 +15,12 @@
     __weak IBOutlet UITextField *txtPassword;
     
     __weak IBOutlet UILabel *txtMessage;
+    __weak IBOutlet UIButton *btnLogin;
 }
 
 
 @property (weak, nonatomic) IBOutlet UILabel *lblDevice;
 
 - (IBAction)login:(id)sender;
+- (void)logOutUser;
 @end

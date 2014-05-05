@@ -57,17 +57,12 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 0;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
     
-    NSLog(@"%lu", (unsigned long)[[[ToDoStore sharedStore] tasksForCategory:currentCategory] count]);
+    NSLog(@"%lu",(unsigned long)[[[ToDoStore sharedStore] tasksForCategory:currentCategory] count]);
     
     return [[[ToDoStore sharedStore] tasksForCategory:currentCategory] count];
     
@@ -85,7 +80,7 @@
     }
     
     // Set the text on the cell
-    Task *task = [[[ToDoStore sharedStore] allTasks] objectAtIndex:[indexPath row]];
+    Task *task = [[[ToDoStore sharedStore] tasksForCategory:currentCategory] objectAtIndex:[indexPath row]];
     
     [[cell textLabel] setText:[task label]];
     
